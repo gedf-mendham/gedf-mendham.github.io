@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artisan Biscuit Co. | Handcrafted Gourmet Biscuits & Custom Treats</title>
+  <title>The Artisan Biscuit Co. | Handcrafted Gourmet Biscuits & Custom Treats</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,24 +13,28 @@
         extend: {
           colors: {
             bakery: {
-              50: '#fdfbf7',
-              100: '#f7f2e8',
-              200: '#eee3d0',
-              300: '#e1cdb0',
-              400: '#cfac7f',
-              500: '#bd8b52',
-              600: '#aa7342',
-              700: '#8c5a35',
-              800: '#724930',
-              900: '#5e3d2a',
-              dark: '#2c1a10',
+              50: '#FFFDF9',
+              100: '#F7F2E8',
+              200: '#EEE3D0',
+              300: '#E1CDB0',
+              400: '#CFAC7F',
+              500: '#BD8B52',
+              600: '#AA7342',
+              700: '#8C5A35',
+              800: '#4A2810',
+              900: '#29221D',
+              dark: '#1C1612',
             },
-            accent: '#d97706',
-            gold: '#d4af37'
+            accent: {
+              DEFAULT: '#B45309',
+              light: '#D97706',
+              hover: '#92400E'
+            },
+            gold: '#D4AF37'
           },
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
-            serif: ['Georgia', 'serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
           }
         }
       }
@@ -40,38 +44,47 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Inter Font -->
+  <!-- Inter & Playfair Display Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #fdfbf7;
-      color: #2c1a10;
+      background-color: #FFFDF9;
+      color: #29221D;
     }
     .font-serif-title {
       font-family: 'Playfair Display', Georgia, serif;
     }
-    /* Custom Scrollbar for Debug Panel */
-    .debug-scroll::-webkit-scrollbar {
+    /* Custom Scrollbar */
+    .custom-scroll::-webkit-scrollbar {
       width: 6px;
     }
-    .debug-scroll::-webkit-scrollbar-track {
+    .custom-scroll::-webkit-scrollbar-track {
       background: #1e1e1e;
     }
-    .debug-scroll::-webkit-scrollbar-thumb {
+    .custom-scroll::-webkit-scrollbar-thumb {
       background: #4a4a4a;
       border-radius: 3px;
+    }
+    .hero-pattern {
+      background-color: #F7F2E8;
+      background-image: radial-gradient(#BD8B52 0.75px, transparent 0.75px), radial-gradient(#BD8B52 0.75px, #F7F2E8 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0,15px 15px;
+      background-opacity: 0.15;
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-bakery-200 selection:text-bakery-900">
 
   <script>
-    // Initialize DataLayer
+    // Global DataLayer Initialization
     window.dataLayer = window.dataLayer || [];
 
-    // DataLayer Helper with Console Logging & UI Event Debugger stream
+    // Master DataLayer Helper Function
     function pushToDataLayer(eventName, eventParams = {}) {
       const payload = {
         event: eventName,
@@ -91,6 +104,12 @@
       }
     }
 
+    // Default Image Fallback Helper
+    function handleImgError(imgElement, text = 'Artisan Biscuit') {
+      imgElement.onerror = null;
+      imgElement.src = `https://placehold.co/600x600/8B4513/FFFFFF?text=${encodeURIComponent(text)}`;
+    }
+
     // Page View Tracking
     window.addEventListener('DOMContentLoaded', () => {
       pushToDataLayer('page_view', {
@@ -102,9 +121,15 @@
   </script>
 
   <!-- Top Announcement Bar -->
-  <div class="bg-bakery-900 text-bakery-100 text-xs py-2 px-4 text-center flex justify-between items-center max-w-full">
-    <div class="hidden sm:block text-bakery-300">🌿 100% Organic Ingredients | Free UK Shipping over £40</div>
-    <div class="mx-auto sm:mx-0">✨ Use Code <span class="font-bold text-gold">ARTISAN10</span> for 10% Off Your First Order</div>
+  <div class="bg-bakery-900 text-bakery-100 text-xs py-2.5 px-4 text-center flex justify-between items-center max-w-full">
+    <div class="hidden sm:flex items-center space-x-2 text-bakery-300">
+      <span>🌿 100% Organic Ingredients</span>
+      <span>•</span>
+      <span>Free UK Shipping Over £40</span>
+    </div>
+    <div class="mx-auto sm:mx-0 font-medium">
+      ✨ Use Code <span class="font-bold text-gold underline">ARTISAN10</span> for 10% Off Your First Order
+    </div>
     <a href="#quote-section" 
        onclick="pushToDataLayer('cta_click', { cta_id: 'top_banner_quote', cta_text: 'Corporate Orders', destination: '#quote-section' })"
        class="hidden md:inline-block underline text-bakery-200 hover:text-white transition">
@@ -126,14 +151,14 @@
 
         <!-- Brand Logo -->
         <a href="#" 
-           onclick="pushToDataLayer('cta_click', { cta_id: 'brand_logo', cta_text: 'Artisan Biscuit Co.', destination: '#' })"
+           onclick="pushToDataLayer('cta_click', { cta_id: 'brand_logo', cta_text: 'The Artisan Biscuit Co.', destination: '#' })"
            class="flex items-center space-x-3 group">
-          <div class="w-10 h-10 rounded-full bg-bakery-700 text-bakery-50 flex items-center justify-center font-serif-title font-bold text-xl shadow-md group-hover:bg-bakery-600 transition">
+          <div class="w-10 h-10 rounded-full bg-bakery-800 text-bakery-50 flex items-center justify-center font-serif-title font-bold text-xl shadow-md group-hover:bg-accent transition duration-300">
             A
           </div>
           <div class="flex flex-col">
-            <span class="font-serif-title text-xl font-bold tracking-tight text-bakery-900">Artisan Biscuit Co.</span>
-            <span class="text-[10px] tracking-widest uppercase text-bakery-600 font-semibold">Bakers &amp; Confectioners</span>
+            <span class="font-serif-title text-xl font-bold tracking-tight text-bakery-900">The Artisan Biscuit Co.</span>
+            <span class="text-[10px] tracking-widest uppercase text-accent font-bold">Handcrafted &amp; Baked Fresh</span>
           </div>
         </a>
 
@@ -141,30 +166,30 @@
         <nav class="hidden md:flex space-x-8 text-sm font-medium text-bakery-800">
           <a href="#products" 
              onclick="pushToDataLayer('cta_click', { cta_id: 'nav_shop', cta_text: 'Shop Bakery', destination: '#products' })" 
-             class="hover:text-bakery-600 transition">Shop Bakery</a>
+             class="hover:text-accent transition">Shop Bakery</a>
           <a href="#quote-section" 
-             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_custom_quote', cta_text: 'Custom Orders', destination: '#quote-section' })" 
-             class="hover:text-bakery-600 transition">Custom &amp; Corporate</a>
+             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_custom_quote', cta_text: 'Custom & Corporate', destination: '#quote-section' })" 
+             class="hover:text-accent transition">Custom &amp; Corporate</a>
           <a href="#testimonials" 
              onclick="pushToDataLayer('cta_click', { cta_id: 'nav_reviews', cta_text: 'Reviews', destination: '#testimonials' })" 
-             class="hover:text-bakery-600 transition">Reviews</a>
+             class="hover:text-accent transition">Reviews</a>
           <a href="#about" 
              onclick="pushToDataLayer('cta_click', { cta_id: 'nav_about', cta_text: 'Our Story', destination: '#about' })" 
-             class="hover:text-bakery-600 transition">Our Story</a>
+             class="hover:text-accent transition">Our Story</a>
         </nav>
 
-        <!-- Header Actions: Debugger Badge, Search, Cart Drawer Toggle -->
+        <!-- Header Actions: Debugger Toggle, Search, Cart Drawer Toggle -->
         <div class="flex items-center space-x-3 sm:space-x-4">
-          <!-- DataLayer Debug Console Toggle -->
+          <!-- DataLayer Debug Console Toggle Button -->
           <button onclick="toggleDebugPanel(); pushToDataLayer('cta_click', { cta_id: 'toggle_dataLayer_inspector', cta_text: 'DataLayer Inspector' });" 
-                  class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200 transition shadow-sm"
+                  class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition shadow-sm"
                   title="Click to view live GA4 DataLayer stream">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
             <span class="hidden sm:inline">DataLayer Live</span>
             <i class="fa-solid fa-code text-xs"></i>
           </button>
 
-          <!-- Wishlist / Search Button Placeholder -->
+          <!-- Search Button Placeholder -->
           <button onclick="pushToDataLayer('cta_click', { cta_id: 'header_search', cta_text: 'Search' }); showNotification('Search modal opened (DataLayer tracked)');" 
                   class="text-bakery-700 hover:text-bakery-900 p-2 rounded-full hover:bg-bakery-100 transition">
             <i class="fa-solid fa-magnifying-glass text-lg"></i>
@@ -173,7 +198,7 @@
           <!-- Slide-out Cart Button -->
           <button id="cart-btn" 
                   onclick="openCartDrawer()" 
-                  class="relative bg-bakery-800 text-white px-3.5 py-2 rounded-xl hover:bg-bakery-700 transition flex items-center space-x-2 shadow-sm">
+                  class="relative bg-bakery-800 text-white px-4 py-2 rounded-xl hover:bg-accent transition flex items-center space-x-2 shadow-sm">
             <i class="fa-solid fa-bag-shopping text-base"></i>
             <span class="hidden sm:inline text-sm font-medium">Cart</span>
             <span id="cart-badge-count" class="bg-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
@@ -187,70 +212,71 @@
     <div id="mobile-menu" class="hidden md:hidden border-t border-bakery-200 bg-bakery-50 px-4 pt-3 pb-6 space-y-3">
       <a href="#products" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_shop', cta_text: 'Shop Bakery' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Shop Bakery</a>
       <a href="#quote-section" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_quote', cta_text: 'Custom Orders' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Custom &amp; Corporate Orders</a>
-      <a href="#testimonials" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_reviews', cta_text: 'Reviews' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Reviews &amp; Press</a>
+      <a href="#testimonials" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_reviews', cta_text: 'Reviews' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Reviews &amp; Testimonials</a>
       <a href="#about" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_about', cta_text: 'Our Story' });" class="block py-2 text-bakery-800 font-medium">Our Story</a>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-b from-bakery-100 via-bakery-50 to-white pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+  <section class="relative hero-pattern pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-bakery-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-bakery-200/70 text-bakery-800 text-xs font-semibold tracking-wide uppercase">
-            <i class="fa-solid fa-award text-gold"></i>
-            <span>Award-Winning Handmade Shortbreads &amp; Custom Biscuits</span>
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bakery-200/80 border border-bakery-300 text-bakery-800 text-xs font-semibold tracking-wide uppercase">
+            <i class="fa-solid fa-award text-accent"></i>
+            <span>Award-Winning Handmade Shortbreads &amp; Custom Treats</span>
           </div>
           
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-bold text-bakery-dark leading-tight">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-bold text-bakery-900 leading-tight">
             Handcrafted with Passion. <br class="hidden sm:inline"/>
-            <span class="text-bakery-600 italic">Baked to Order.</span>
+            <span class="text-accent italic">Baked Fresh to Order.</span>
           </h1>
           
-          <p class="text-lg text-bakery-800 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            Discover our buttery melt-in-your-mouth luxury shortbreads, hand-iced celebration cookies, and bespoke branded corporate biscuits baked fresh daily in our Cotswolds kitchen.
+          <p class="text-base sm:text-lg text-bakery-800 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Discover our buttery melt-in-your-mouth shortbreads, stuffed cookie creations, and bespoke corporate branded biscuits baked daily in our Cotswolds kitchen.
           </p>
 
           <!-- Action CTAs -->
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
             <a href="#products" 
                onclick="pushToDataLayer('cta_click', { cta_id: 'hero_shop_collection', cta_text: 'Shop Collection', destination: '#products' })" 
-               class="px-8 py-4 bg-bakery-800 text-white font-medium rounded-xl shadow-lg hover:bg-bakery-700 hover:shadow-xl transition transform active:scale-95 text-center flex items-center justify-center space-x-2">
-              <span>Shop Collection</span>
+               class="px-8 py-4 bg-bakery-800 text-white font-medium rounded-xl shadow-lg hover:bg-accent transition transform active:scale-95 text-center flex items-center justify-center space-x-2">
+              <span>Explore Bakery Catalog</span>
               <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
             
             <a href="#quote-section" 
-               onclick="pushToDataLayer('cta_click', { cta_id: 'hero_get_custom_quote', cta_text: 'Get Custom Quote', destination: '#quote-section' })" 
+               onclick="pushToDataLayer('cta_click', { cta_id: 'hero_get_custom_quote', cta_text: 'Custom Quote Calculator', destination: '#quote-section' })" 
                class="px-8 py-4 bg-white text-bakery-900 border-2 border-bakery-300 font-medium rounded-xl hover:bg-bakery-100 transition text-center shadow-sm flex items-center justify-center space-x-2">
-              <i class="fa-solid fa-wand-magic-sparkles text-bakery-600"></i>
-              <span>Get Custom Quote</span>
+              <i class="fa-solid fa-calculator text-accent"></i>
+              <span>Custom Quote Calculator</span>
             </a>
           </div>
 
-          <!-- Social Proof Pill -->
+          <!-- Social Proof Badge -->
           <div class="pt-6 flex items-center justify-center lg:justify-start space-x-4 text-xs text-bakery-700">
             <div class="flex text-amber-500">
               <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-            <span class="font-semibold text-bakery-900">4.9 / 5.0</span>
-            <span class="text-bakery-500">•</span>
-            <span>Over 12,000+ Happy Customers &amp; Wedding Couples</span>
+            <span class="font-bold text-bakery-900">4.9 / 5.0 Rating</span>
+            <span class="text-bakery-400">•</span>
+            <span>Over 15,000+ Happy Customers &amp; Events</span>
           </div>
 
         </div>
 
-        <!-- Hero Visual Showcase Card -->
+        <!-- Hero Visual Showcase Card with Fallback -->
         <div class="lg:col-span-5 relative">
           <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-bakery-200 group">
             <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80" 
+                 onerror="handleImgError(this, 'Heritage Shortbread')"
                  alt="Freshly baked artisan biscuits" 
                  class="w-full h-96 sm:h-[450px] object-cover transform group-hover:scale-105 transition duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-bakery-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-              <span class="bg-accent text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-2">Bestseller Box</span>
-              <h3 class="font-serif-title text-2xl font-bold">The Heritage Shortbread Hamper</h3>
-              <p class="text-xs text-bakery-100 mt-1">Rich butter, French sea salt, and lavender infused shortbreads.</p>
+            <div class="absolute inset-0 bg-gradient-to-t from-bakery-dark/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+              <span class="bg-accent text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-2">Signature Box</span>
+              <h3 class="font-serif-title text-2xl font-bold">The Cotswold Heritage Hamper</h3>
+              <p class="text-xs text-bakery-100 mt-1">Grass-fed butter, Maldon sea salt, and floral lavender infusions.</p>
             </div>
           </div>
         </div>
@@ -259,90 +285,89 @@
     </div>
   </section>
 
-  <!-- Features Bar -->
-  <section class="border-y border-bakery-200 bg-white py-8">
+  <!-- Features Value Bar -->
+  <section class="border-b border-bakery-200 bg-white py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="p-3">
-          <i class="fa-solid fa-truck-fast text-2xl text-bakery-600 mb-2"></i>
-          <h4 class="font-semibold text-sm text-bakery-900">Fresh Daily Shipping</h4>
-          <p class="text-xs text-bakery-600 mt-1">Baked every morning &amp; shipped fresh</p>
+          <i class="fa-solid fa-truck-fast text-2xl text-accent mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">Baked Daily &amp; Shipped Fresh</h4>
+          <p class="text-xs text-bakery-600 mt-1">Dispatched within 24 hours of baking</p>
         </div>
         <div class="p-3">
-          <i class="fa-solid fa-leaf text-2xl text-bakery-600 mb-2"></i>
+          <i class="fa-solid fa-leaf text-2xl text-accent mb-2"></i>
           <h4 class="font-semibold text-sm text-bakery-900">100% Organic Butter</h4>
           <p class="text-xs text-bakery-600 mt-1">No artificial preservatives or palm oil</p>
         </div>
         <div class="p-3">
-          <i class="fa-solid fa-stamp text-2xl text-bakery-600 mb-2"></i>
+          <i class="fa-solid fa-stamp text-2xl text-accent mb-2"></i>
           <h4 class="font-semibold text-sm text-bakery-900">Custom Logo Printing</h4>
-          <p class="text-xs text-bakery-600 mt-1">For corporate events &amp; weddings</p>
+          <p class="text-xs text-bakery-600 mt-1">High-resolution edible logo icing</p>
         </div>
         <div class="p-3">
-          <i class="fa-solid fa-recycle text-2xl text-bakery-600 mb-2"></i>
-          <h4 class="font-semibold text-sm text-bakery-900">Eco Eco Packaging</h4>
-          <p class="text-xs text-bakery-600 mt-1">100% recyclable tin &amp; compostable bags</p>
+          <i class="fa-solid fa-recycle text-2xl text-accent mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">Eco-Friendly Packaging</h4>
+          <p class="text-xs text-bakery-600 mt-1">100% recyclable tins &amp; compostable bags</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Product Section -->
+  <!-- Product Catalog Section -->
   <section id="products" class="py-16 md:py-24 bg-bakery-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-bakery-600">Fresh From Our Ovens</span>
-          <h2 class="text-3xl md:text-4xl font-serif-title font-bold text-bakery-dark mt-1">Our Signature Biscuit Selection</h2>
+          <span class="text-xs font-bold uppercase tracking-wider text-accent">Fresh From Our Ovens</span>
+          <h2 class="text-3xl md:text-4xl font-serif-title font-bold text-bakery-900 mt-1">Our Signature Biscuit Selection</h2>
         </div>
         <p class="text-sm text-bakery-700 max-w-md mt-3 md:mt-0">
-          Hand-batched using grass-fed British butter, organic flour, and refined natural flavorings.
+          Hand-batched using grass-fed British butter, organic flour, and refined natural ingredients.
         </p>
       </div>
 
       <!-- Category Filter Tabs -->
       <div class="flex flex-wrap gap-2 mb-8 border-b border-bakery-200 pb-4" id="category-filters">
-        <!-- JS populated or direct links with DataLayer tracking -->
         <button onclick="filterCategory('all', this)" class="filter-btn active-tab px-4 py-2 rounded-xl text-sm font-medium bg-bakery-800 text-white transition shadow-sm">
-          All Biscuits
+          All Treats
         </button>
         <button onclick="filterCategory('shortbread', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
-          Classic Shortbread
+          Shortbread
         </button>
-        <button onclick="filterCategory('custom-iced', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
-          Custom Hand-Iced
+        <button onclick="filterCategory('stuffed', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Stuffed Cookies
         </button>
-        <button onclick="filterCategory('hampers', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
-          Gift Hampers
+        <button onclick="filterCategory('savory', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Savory Crackers
         </button>
-        <button onclick="filterCategory('gluten-free', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
-          Gluten-Free Range
+        <button onclick="filterCategory('vegan-gf', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Vegan &amp; Gluten-Free
         </button>
       </div>
 
       <!-- Product Grid -->
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Dynamic Product Cards Injected by JS -->
+        <!-- JS Injected Cards -->
       </div>
 
     </div>
   </section>
 
-  <!-- Custom Quote Section -->
+  <!-- Interactive Custom Quote Calculator Section -->
   <section id="quote-section" class="py-16 md:py-24 bg-white border-t border-bakery-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-br from-bakery-100 to-bakery-50 rounded-3xl p-6 sm:p-10 lg:p-12 border border-bakery-200 shadow-xl">
+      <div class="bg-gradient-to-br from-bakery-100 via-bakery-50 to-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-bakery-200 shadow-xl">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div class="lg:col-span-5 space-y-6">
-            <span class="inline-block px-3 py-1 bg-bakery-800 text-white text-xs font-bold rounded-full uppercase tracking-wider">Corporate &amp; Wedding Orders</span>
+            <span class="inline-block px-3 py-1 bg-bakery-800 text-white text-xs font-bold rounded-full uppercase tracking-wider">Corporate &amp; Bespoke Orders</span>
             <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-bakery-900 leading-tight">
               Bespoke Custom Iced &amp; Branded Biscuits
             </h2>
             <p class="text-bakery-700 text-sm leading-relaxed">
-              Elevate your event, launch product campaigns, or delight wedding guests with custom engraved, color-matched, or edible photo-printed artisan biscuits.
+              Elevate your corporate event, product launch, or wedding celebration with custom color-matched, photo-printed, or hand-iced artisan biscuits.
             </p>
             <ul class="space-y-3 text-sm text-bakery-800 font-medium">
               <li class="flex items-center space-x-3">
@@ -351,87 +376,96 @@
               </li>
               <li class="flex items-center space-x-3">
                 <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                <span>Individual eco-wrapper with personalized ribbon</span>
+                <span>Individually flow-wrapped eco packaging</span>
               </li>
               <li class="flex items-center space-x-3">
                 <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                <span>Fast 5-day dispatch on volume orders</span>
+                <span>Tiered volume discounts up to 40% off</span>
               </li>
             </ul>
           </div>
 
-          <!-- Interactive Quote Form -->
+          <!-- Interactive Calculator Form -->
           <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-bakery-200">
-            <h3 class="font-serif-title text-xl font-bold text-bakery-900 mb-4">Instant Quote Calculator &amp; Request</h3>
+            <h3 class="font-serif-title text-xl font-bold text-bakery-900 mb-4 flex items-center justify-between">
+              <span>Interactive Quote Calculator</span>
+              <i class="fa-solid fa-calculator text-accent"></i>
+            </h3>
             
             <form id="custom-quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-4">
+              <!-- Quantity Slider -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <label class="text-xs font-bold text-bakery-800 uppercase">Quantity (Biscuits):</label>
+                  <span id="qty-slider-val" class="text-sm font-bold text-accent">250 units</span>
+                </div>
+                <input type="range" id="quote-qty-slider" min="100" max="5000" step="50" value="250" 
+                       oninput="updateQuoteEstimate();"
+                       onchange="trackFormField('quote_calculator', 'quantity_slider', 'change')"
+                       class="w-full h-2 bg-bakery-200 rounded-lg appearance-none cursor-pointer accent-accent">
+                <div class="flex justify-between text-[10px] text-bakery-600 mt-1">
+                  <span>100 min</span>
+                  <span>1,000</span>
+                  <span>2,500</span>
+                  <span>5,000+</span>
+                </div>
+              </div>
+
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Decoration Style</label>
+                  <select id="quote-style" 
+                          onchange="updateQuoteEstimate(); trackFormField('quote_calculator', 'decoration_style', 'select');"
+                          class="w-full px-3 py-2 rounded-lg border border-bakery-300 text-xs focus:ring-2 focus:ring-accent focus:outline-none">
+                    <option value="1.0">Standard Hand-Iced</option>
+                    <option value="1.2" selected>Custom Printed Logo (Edible)</option>
+                    <option value="1.35">Intricate Royal Icing Design</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Packaging Choice</label>
+                  <select id="quote-packaging" 
+                          onchange="updateQuoteEstimate(); trackFormField('quote_calculator', 'packaging', 'select');"
+                          class="w-full px-3 py-2 rounded-lg border border-bakery-300 text-xs focus:ring-2 focus:ring-accent focus:outline-none">
+                    <option value="0.0">Compostable Individual Bag</option>
+                    <option value="0.30">Individual Gift Box w/ Ribbon (+£0.30/unit)</option>
+                    <option value="0.75">Premium Keepsake Tin (+£0.75/unit)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Customer Info -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div>
                   <label class="block text-xs font-semibold text-bakery-800 mb-1">Your Full Name *</label>
                   <input type="text" id="quote-name" required 
                          onfocus="trackFormField('quote_form', 'name', 'focus')"
-                         onchange="trackFormField('quote_form', 'name', 'change')"
                          placeholder="e.g. Eleanor Vance" 
-                         class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                         class="w-full px-3.5 py-2 rounded-lg border border-bakery-300 text-xs focus:ring-2 focus:ring-accent focus:outline-none">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-bakery-800 mb-1">Email Address *</label>
                   <input type="email" id="quote-email" required 
                          onfocus="trackFormField('quote_form', 'email', 'focus')"
-                         onchange="trackFormField('quote_form', 'email', 'change')"
                          placeholder="eleanor@company.com" 
-                         class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                         class="w-full px-3.5 py-2 rounded-lg border border-bakery-300 text-xs focus:ring-2 focus:ring-accent focus:outline-none">
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Event Type</label>
-                  <select id="quote-event" 
-                          onchange="updateQuoteEstimate(); trackFormField('quote_form', 'event_type', 'select');"
-                          class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
-                    <option value="Corporate Event">Corporate / Brand Activation</option>
-                    <option value="Wedding Favours">Wedding Favours</option>
-                    <option value="Birthday / Party">Birthday / Celebration</option>
-                    <option value="PR Gift Box">PR Gift Boxes</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Quantity (Units)</label>
-                  <select id="quote-quantity" 
-                          onchange="updateQuoteEstimate(); trackFormField('quote_form', 'quantity', 'select');"
-                          class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
-                    <option value="50">50 Biscuits</option>
-                    <option value="100" selected>100 Biscuits</option>
-                    <option value="250">250 Biscuits</option>
-                    <option value="500">500 Biscuits</option>
-                    <option value="1000">1000+ Biscuits</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold text-bakery-800 mb-1">Design &amp; Customization Notes</label>
-                <textarea id="quote-notes" rows="2" 
-                          onfocus="trackFormField('quote_form', 'notes', 'focus')"
-                          placeholder="Describe logo, text, or icing color ideas..." 
-                          class="w-full px-3.5 py-2 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none"></textarea>
-              </div>
-
-              <!-- Estimated Price Banner -->
-              <div class="p-3.5 rounded-xl bg-bakery-100 border border-bakery-200 flex justify-between items-center">
+              <!-- Dynamic Estimated Price Banner -->
+              <div class="p-4 rounded-xl bg-bakery-100 border border-bakery-200 flex justify-between items-center my-2">
                 <div>
                   <span class="text-xs text-bakery-700 font-medium">Estimated Investment:</span>
-                  <div id="quote-estimate-price" class="text-lg font-bold text-bakery-900">£220.00 <span class="text-xs font-normal text-bakery-600">(£2.20 / unit)</span></div>
+                  <div id="quote-estimate-price" class="text-xl font-bold text-bakery-900">£450.00 <span class="text-xs font-normal text-bakery-600">(£1.80 / unit)</span></div>
                 </div>
-                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full">Volume Discount Applied</span>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full">Volume Discount Included</span>
               </div>
 
               <button type="submit" 
-                      class="w-full py-3 bg-bakery-800 text-white font-medium text-sm rounded-xl hover:bg-bakery-700 transition shadow-md flex justify-center items-center space-x-2">
+                      class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-accent transition shadow-md flex justify-center items-center space-x-2">
                 <i class="fa-solid fa-paper-plane text-xs"></i>
-                <span>Submit Custom Order Inquiry</span>
+                <span>Submit Official Quote Request</span>
               </button>
             </form>
           </div>
@@ -445,55 +479,55 @@
   <section id="testimonials" class="py-16 bg-bakery-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-bold uppercase tracking-wider text-bakery-600">Loved By Customers &amp; Event Planners</span>
-        <h2 class="text-3xl font-serif-title font-bold text-bakery-dark mt-1">What Bakers &amp; Clients Say</h2>
+        <span class="text-xs font-bold uppercase tracking-wider text-accent">Client Feedback</span>
+        <h2 class="text-3xl font-serif-title font-bold text-bakery-900 mt-1">Loved By Event Planners &amp; Foodies</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Testimonial 1 -->
+        <!-- Review 1 -->
         <div onclick="pushToDataLayer('testimonial_engagement', { author: 'Sarah Jenkins', type: 'review_click', rating: 5 })"
              class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
           <div class="flex text-amber-500 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-sm text-bakery-800 italic mb-4">"The custom iced biscuits for our brand re-launch were absolute showstoppers! Everyone commented on how delicious and butter-rich they were."</p>
+          <p class="text-xs text-bakery-800 italic mb-4 leading-relaxed">"The custom logo biscuits for our product launch were stunning. Perfectly crisp and rich in butter flavor. Delivery was right on time!"</p>
           <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">SJ</div>
+            <div class="w-8 h-8 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">SJ</div>
             <div>
               <h5 class="text-xs font-bold text-bakery-900">Sarah Jenkins</h5>
-              <p class="text-[11px] text-bakery-600">Marketing Lead, Vogue Events</p>
+              <p class="text-[10px] text-bakery-600">Marketing Director, BrandCo</p>
             </div>
           </div>
         </div>
 
-        <!-- Testimonial 2 -->
+        <!-- Review 2 -->
         <div onclick="pushToDataLayer('testimonial_engagement', { author: 'David & Clare', type: 'review_click', rating: 5 })"
              class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
           <div class="flex text-amber-500 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-sm text-bakery-800 italic mb-4">"We ordered 150 personalized shortbreads as wedding favours. They were packaged beautifully and tasted divine. 10/10 service!"</p>
+          <p class="text-xs text-bakery-800 italic mb-4 leading-relaxed">"We ordered 200 iced wedding favours. Our guests couldn't stop raving about them! Beautifully packaged and tasted divine."</p>
           <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">DC</div>
+            <div class="w-8 h-8 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">DC</div>
             <div>
               <h5 class="text-xs font-bold text-bakery-900">David &amp; Clare W.</h5>
-              <p class="text-[11px] text-bakery-600">Married in Cotswolds</p>
+              <p class="text-[10px] text-bakery-600">Cotswolds Wedding</p>
             </div>
           </div>
         </div>
 
-        <!-- Testimonial 3 -->
+        <!-- Review 3 -->
         <div onclick="pushToDataLayer('testimonial_engagement', { author: 'Michael Ross', type: 'review_click', rating: 5 })"
              class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
           <div class="flex text-amber-500 text-xs mb-3">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
-          <p class="text-sm text-bakery-800 italic mb-4">"The gluten-free shortbread collection is by far the best I've tasted in years. Crumbly, rich, and not overly sweet. Will buy monthly."</p>
+          <p class="text-xs text-bakery-800 italic mb-4 leading-relaxed">"Hands down the best gluten-free shortbread I've ever eaten. Crumbly, buttery, and not overly sweet. Will be subscribing monthly."</p>
           <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">MR</div>
+            <div class="w-8 h-8 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">MR</div>
             <div>
               <h5 class="text-xs font-bold text-bakery-900">Michael Ross</h5>
-              <p class="text-[11px] text-bakery-600">Verified Customer</p>
+              <p class="text-[10px] text-bakery-600">Verified Buyer</p>
             </div>
           </div>
         </div>
@@ -509,11 +543,11 @@
         <!-- Brand Info -->
         <div class="space-y-4">
           <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-full bg-bakery-600 text-white flex items-center justify-center font-serif-title font-bold text-lg">A</div>
-            <span class="font-serif-title text-xl font-bold text-white">Artisan Biscuit Co.</span>
+            <div class="w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center font-serif-title font-bold text-lg">A</div>
+            <span class="font-serif-title text-xl font-bold text-white">The Artisan Biscuit Co.</span>
           </div>
           <p class="text-xs text-bakery-300 leading-relaxed">
-            Crafting luxury traditional shortbreads and custom decorated biscuits from our bakery in the heart of the British countryside.
+            Crafting luxury traditional shortbreads and custom decorated biscuits from our bakery kitchen in the Cotswolds countryside.
           </p>
         </div>
 
@@ -528,26 +562,26 @@
           </ul>
         </div>
 
-        <!-- Contact & Hours -->
+        <!-- Kitchen Info -->
         <div>
           <h4 class="font-serif-title text-sm font-semibold text-white mb-3">Bakery Kitchen</h4>
           <p class="text-xs text-bakery-300 leading-relaxed">
             12 Mill Lane, Chipping Campden<br>
             Cotswolds, GL55 6HB, UK<br><br>
-            Mon - Fri: 8am - 5pm GMT<br>
+            Mon - Fri: 8:00 AM - 5:00 PM GMT<br>
             Email: hello@artisanbiscuitco.co.uk
           </p>
         </div>
 
-        <!-- Newsletter Signup -->
+        <!-- Newsletter Form -->
         <div>
           <h4 class="font-serif-title text-sm font-semibold text-white mb-3">Join The Biscuit Club</h4>
-          <p class="text-xs text-bakery-300 mb-3">Get 10% off your first order plus secret seasonal drop alerts.</p>
+          <p class="text-xs text-bakery-300 mb-3">Get 10% off your first order plus secret drop alerts.</p>
           
           <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
             <input type="email" id="newsletter-email" required
                    onfocus="trackFormField('newsletter_form', 'email', 'focus')"
-                   placeholder="Enter your email" 
+                   placeholder="Enter your email address" 
                    class="w-full px-3 py-2 rounded-lg bg-bakery-900 border border-bakery-700 text-xs text-white placeholder-bakery-400 focus:outline-none focus:border-gold">
             <button type="submit" 
                     class="w-full py-2 bg-gold hover:bg-amber-600 text-bakery-dark font-bold text-xs rounded-lg transition shadow-sm">
@@ -559,11 +593,10 @@
       </div>
 
       <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-bakery-400 space-y-4 sm:space-y-0">
-        <p>© 2026 Artisan Biscuit Co. All rights reserved. GA4 DataLayer tracking integrated.</p>
+        <p>© 2026 The Artisan Biscuit Co. All rights reserved. Configured for GitHub Pages &amp; GA4 DataLayer tracking.</p>
         <div class="flex space-x-4">
           <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_privacy', cta_text: 'Privacy Policy' })" class="hover:underline">Privacy Policy</a>
           <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_terms', cta_text: 'Terms of Service' })" class="hover:underline">Terms of Service</a>
-          <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_cookies', cta_text: 'Cookie Settings' })" class="hover:underline">Cookie Preferences</a>
         </div>
       </div>
     </div>
@@ -602,14 +635,14 @@
         </div>
         <div class="flex justify-between text-sm font-bold text-bakery-900 pt-2 border-t border-bakery-200">
           <span>Total (Incl. VAT)</span>
-          <span id="cart-total-text" class="text-bakery-800 text-base">£0.00</span>
+          <span id="cart-total-text" class="text-accent text-base">£0.00</span>
         </div>
       </div>
 
       <button id="checkout-cta-btn" 
               onclick="startCheckout()" 
-              class="w-full py-3.5 bg-bakery-800 text-white font-medium text-sm rounded-xl hover:bg-bakery-700 transition shadow-md flex justify-center items-center space-x-2 disabled:opacity-50">
-        <span>Proceed to Checkout</span>
+              class="w-full py-3.5 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-accent transition shadow-md flex justify-center items-center space-x-2 disabled:opacity-50">
+        <span>Proceed to Express Checkout</span>
         <i class="fa-solid fa-arrow-right text-xs"></i>
       </button>
     </div>
@@ -617,7 +650,7 @@
 
   <!-- Quick View Product Modal -->
   <div id="quickview-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border border-bakery-200 relative animate-fade-in">
+    <div class="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border border-bakery-200 relative">
       <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-bakery-900 flex items-center justify-center shadow">
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -634,8 +667,8 @@
       <!-- Checkout Header -->
       <div class="bg-bakery-900 text-white p-4 sm:p-6 flex justify-between items-center">
         <div>
-          <span class="text-xs uppercase tracking-wider text-gold font-bold">Secure Express Checkout</span>
-          <h3 class="font-serif-title text-xl font-bold">Artisan Biscuit Bakery Store</h3>
+          <span class="text-[10px] uppercase tracking-wider text-gold font-bold">Express Checkout</span>
+          <h3 class="font-serif-title text-xl font-bold">The Artisan Biscuit Co.</h3>
         </div>
         <button onclick="closeCheckoutModal()" class="text-bakery-300 hover:text-white text-lg">
           <i class="fa-solid fa-xmark"></i>
@@ -647,40 +680,40 @@
         
         <!-- Step 1: Shipping Details -->
         <div class="space-y-3">
-          <h4 class="text-sm font-bold text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
-            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-xs flex items-center justify-center">1</span>
-            <span>Shipping &amp; Delivery Address</span>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
+            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-[10px] flex items-center justify-center">1</span>
+            <span>Shipping Address</span>
           </h4>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input type="text" id="chk-first-name" required placeholder="First Name *" 
                    onchange="trackCheckoutStep('add_shipping_info', 'first_name')"
-                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
             <input type="text" id="chk-last-name" required placeholder="Last Name *" 
                    onchange="trackCheckoutStep('add_shipping_info', 'last_name')"
-                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
           </div>
 
-          <input type="email" id="chk-email" required placeholder="Email Address (for order tracking receipt) *" 
+          <input type="email" id="chk-email" required placeholder="Email Address (for order confirmation &amp; tracking) *" 
                  onchange="trackCheckoutStep('add_shipping_info', 'email')"
-                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
 
           <input type="text" id="chk-address" required placeholder="Street Address *" 
                  onchange="trackCheckoutStep('add_shipping_info', 'address')"
-                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
 
           <div class="grid grid-cols-2 gap-3">
             <input type="text" id="chk-city" required placeholder="Town / City *" 
-                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
             <input type="text" id="chk-postcode" required placeholder="Postcode *" 
-                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-accent">
           </div>
         </div>
 
         <!-- Step 2: Payment Options -->
         <div class="space-y-3">
-          <h4 class="text-sm font-bold text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
-            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-xs flex items-center justify-center">2</span>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
+            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-[10px] flex items-center justify-center">2</span>
             <span>Payment Method</span>
           </h4>
 
@@ -688,17 +721,17 @@
             <label class="border border-bakery-300 p-3 rounded-xl flex items-center space-x-2 cursor-pointer hover:bg-bakery-50">
               <input type="radio" name="payment_method" value="Credit Card" checked 
                      onchange="trackCheckoutStep('add_payment_info', 'Credit Card')">
-              <span class="text-xs font-semibold text-bakery-800"><i class="fa-solid fa-credit-card mr-1 text-bakery-600"></i> Credit / Debit</span>
+              <span class="text-xs font-semibold text-bakery-800"><i class="fa-solid fa-credit-card mr-1 text-accent"></i> Credit Card</span>
             </label>
             <label class="border border-bakery-300 p-3 rounded-xl flex items-center space-x-2 cursor-pointer hover:bg-bakery-50">
-              <input type="radio" name="payment_method" value="Apple Pay / GPay" 
+              <input type="radio" name="payment_method" value="Apple Pay" 
                      onchange="trackCheckoutStep('add_payment_info', 'Apple Pay')">
-              <span class="text-xs font-semibold text-bakery-800"><i class="fa-brands fa-apple mr-1"></i> Express Pay</span>
+              <span class="text-xs font-semibold text-bakery-800"><i class="fa-brands fa-apple mr-1"></i> Apple Pay</span>
             </label>
           </div>
 
           <div class="space-y-2 bg-bakery-50 p-3 rounded-xl border border-bakery-200 text-xs">
-            <input type="text" placeholder="Card Number (Mock - Demo Only)" value="4242 •••• •••• 4242" readonly 
+            <input type="text" placeholder="Card Number (Demo)" value="4242 •••• •••• 4242" readonly 
                    class="w-full bg-white px-3 py-2 border border-bakery-300 rounded text-bakery-600">
             <div class="grid grid-cols-2 gap-2">
               <input type="text" placeholder="MM/YY" value="12/28" readonly class="bg-white px-3 py-1.5 border border-bakery-300 rounded text-bakery-600">
@@ -715,30 +748,30 @@
           </div>
 
           <button type="submit" 
-                  class="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 text-white font-bold text-sm rounded-xl hover:bg-emerald-800 transition shadow-lg flex items-center justify-center space-x-2">
+                  class="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 text-white font-bold text-xs rounded-xl hover:bg-emerald-800 transition shadow-lg flex items-center justify-center space-x-2">
             <i class="fa-solid fa-lock text-xs"></i>
-            <span>Complete Order (£)</span>
+            <span>Complete Order</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Order Complete Modal Confirmation -->
+  <!-- Order Complete Modal -->
   <div id="order-complete-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white max-w-md w-full rounded-3xl p-8 shadow-2xl text-center space-y-4 border border-bakery-200">
       <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-inner">
         <i class="fa-solid fa-check"></i>
       </div>
-      <h3 class="font-serif-title text-2xl font-bold text-bakery-900">Thank You For Your Order!</h3>
+      <h3 class="font-serif-title text-2xl font-bold text-bakery-900">Order Confirmed!</h3>
       <p class="text-xs text-bakery-700 leading-relaxed">
-        Your artisan treats have been received by our kitchen. A GA4 <code class="bg-bakery-100 text-emerald-800 font-bold px-1 py-0.5 rounded">purchase</code> DataLayer event was successfully triggered!
+        Your artisan order has been submitted to our bakery kitchen. A GA4 <code class="bg-bakery-100 text-emerald-800 font-bold px-1 py-0.5 rounded">purchase</code> DataLayer event was triggered!
       </p>
 
       <div class="bg-bakery-50 p-4 rounded-xl border border-bakery-200 text-left text-xs space-y-1">
         <div class="flex justify-between text-bakery-600">
           <span>Order Reference:</span>
-          <span id="order-ref-id" class="font-mono font-bold text-bakery-900">#ABC-0000</span>
+          <span id="order-ref-id" class="font-mono font-bold text-bakery-900">#ORD-0000</span>
         </div>
         <div class="flex justify-between text-bakery-600">
           <span>Items Ordered:</span>
@@ -752,17 +785,17 @@
 
       <button onclick="closeOrderCompleteModal()" 
               class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-bakery-700 transition">
-        Continue Browsing Bakery
+        Return To Bakery Store
       </button>
     </div>
   </div>
 
-  <!-- Floating DataLayer Live Event Inspector Window -->
-  <div id="debug-panel" class="fixed bottom-4 left-4 z-50 w-96 max-w-[calc(100vw-2rem)] bg-zinc-900 text-zinc-100 rounded-2xl shadow-2xl border border-zinc-700 flex flex-col hidden overflow-hidden transition-all duration-300">
+  <!-- Floating Interactive DataLayer Event Inspector Panel -->
+  <div id="debug-panel" class="fixed bottom-4 right-4 z-50 w-96 max-w-[calc(100vw-2rem)] bg-zinc-900 text-zinc-100 rounded-2xl shadow-2xl border border-zinc-700 flex flex-col hidden overflow-hidden transition-all duration-300">
     <div class="bg-zinc-800 px-4 py-3 flex items-center justify-between border-b border-zinc-700">
       <div class="flex items-center space-x-2">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <h4 class="font-mono text-xs font-bold text-zinc-200">GA4 DataLayer Event Log</h4>
+        <h4 class="font-mono text-xs font-bold text-zinc-200">GA4 DataLayer Inspector</h4>
       </div>
       <div class="flex items-center space-x-2">
         <button onclick="clearDebugLogs()" title="Clear logs" class="text-zinc-400 hover:text-white text-xs px-2 py-0.5 rounded bg-zinc-700">
@@ -774,129 +807,129 @@
       </div>
     </div>
 
-    <!-- Inspector Log Output Stream -->
-    <div id="debug-log-list" class="p-3 h-64 overflow-y-auto debug-scroll font-mono text-[11px] space-y-2 bg-zinc-950">
-      <!-- Dynamic JSON log items appear here -->
+    <!-- Inspector Log Stream Output -->
+    <div id="debug-log-list" class="p-3 h-64 overflow-y-auto custom-scroll font-mono text-[11px] space-y-2 bg-zinc-950">
+      <!-- Dynamic JSON logs injected here -->
     </div>
 
     <div class="bg-zinc-900 px-3 py-2 text-[10px] text-zinc-400 border-t border-zinc-800 flex justify-between items-center">
-      <span>Real-time window.dataLayer Stream</span>
-      <span class="text-emerald-400 font-semibold">Active</span>
+      <span>window.dataLayer Event Monitor</span>
+      <span class="text-emerald-400 font-semibold">Live Stream</span>
     </div>
   </div>
 
   <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-4 right-4 z-50 bg-bakery-900 text-white px-4 py-3 rounded-xl shadow-lg text-xs font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-2 border border-gold">
+  <div id="toast" class="fixed bottom-4 left-4 z-50 bg-bakery-900 text-white px-4 py-3 rounded-xl shadow-lg text-xs font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-2 border border-gold">
     <i class="fa-solid fa-circle-check text-gold"></i>
     <span id="toast-message">Notification</span>
   </div>
 
   <script>
-    // Product Database Catalog
+    // Expanded Products Catalog Database
     const PRODUCTS = [
       {
         id: 'SKU-001',
         name: 'Classic Cotswold Shortbread',
         category: 'shortbread',
-        category_label: 'Classic Shortbread',
+        category_label: 'Shortbread',
         price: 8.50,
         rating: 4.9,
-        reviews_count: 84,
+        reviews_count: 94,
         image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
-        description: 'Melt-in-your-mouth luxury British shortbread rounds baked with pure organic butter and finished with fine caster sugar.',
+        description: 'Melt-in-your-mouth British shortbread baked with organic butter and finished with fine caster sugar.',
         badge: 'Bestseller'
       },
       {
         id: 'SKU-002',
-        name: 'Lavender & Honey Crisp',
-        category: 'shortbread',
-        category_label: 'Classic Shortbread',
-        price: 9.50,
-        rating: 4.8,
-        reviews_count: 52,
-        image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80',
-        description: 'Infused with Cotswold wildflower honey and subtle English lavender buds for a fragrant teatime experience.',
-        badge: 'Seasonal'
-      },
-      {
-        id: 'SKU-003',
-        name: 'Custom Royal Iced Biscuits (Box of 12)',
-        category: 'custom-iced',
-        category_label: 'Custom Hand-Iced',
-        price: 24.00,
+        name: 'Hazelnut Nutella Stuffed Cookie',
+        category: 'stuffed',
+        category_label: 'Stuffed Cookies',
+        price: 11.50,
         rating: 5.0,
-        reviews_count: 118,
-        image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80',
-        description: 'Intricately hand-decorated vanilla sugar cookies customized for birthdays, anniversaries, or special celebrations.',
-        badge: 'Customizable'
-      },
-      {
-        id: 'SKU-004',
-        name: 'Dark Chocolate & Sea Salt Shortbread',
-        category: 'shortbread',
-        category_label: 'Classic Shortbread',
-        price: 10.00,
-        rating: 4.9,
-        reviews_count: 67,
-        image: 'https://images.unsplash.com/photo-1548848221-0c2e497ed557?auto=format&fit=crop&w=600&q=80',
-        description: 'Rich 70% Belgian dark chocolate chunks paired with Maldon sea salt flakes in a crisp buttery dough.',
+        reviews_count: 128,
+        image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80',
+        description: 'Thick brown-butter dough wrapped around a molten roasted hazelnut cocoa filling.',
         badge: 'Popular'
       },
       {
+        id: 'SKU-003',
+        name: 'Rosemary & Aged Cheddar Crackers',
+        category: 'savory',
+        category_label: 'Savory Crackers',
+        price: 7.50,
+        rating: 4.8,
+        reviews_count: 42,
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+        description: 'Crisp savory biscuits packed with 18-month aged Somerset cheddar and fresh garden rosemary.',
+        badge: 'Savory Special'
+      },
+      {
+        id: 'SKU-004',
+        name: 'Vegan Salted Caramel Shortbread',
+        category: 'vegan-gf',
+        category_label: 'Vegan & Gluten-Free',
+        price: 9.50,
+        rating: 4.9,
+        reviews_count: 67,
+        image: 'https://images.unsplash.com/photo-1548848221-0c2e497ed557?auto=format&fit=crop&w=600&q=80',
+        description: 'Crafted with oat flour and coconut butter, layered with gooey vegan caramel and sea salt.',
+        badge: 'Vegan & GF'
+      },
+      {
         id: 'SKU-005',
-        name: 'The Royal Bakery Gift Hamper Box',
-        category: 'hampers',
-        category_label: 'Gift Hampers',
-        price: 45.00,
-        rating: 5.0,
-        reviews_count: 93,
-        image: 'https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&w=600&q=80',
-        description: 'Our premier luxury hamper including 4 biscuit varieties, artisan preserves, and organic loose-leaf tea tin.',
-        badge: 'Luxury Gift'
+        name: 'Dark Choc & Maldon Sea Salt Biscuits',
+        category: 'shortbread',
+        category_label: 'Shortbread',
+        price: 10.00,
+        rating: 4.9,
+        reviews_count: 81,
+        image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80',
+        description: 'Rich 70% Belgian dark chocolate chunks folded into delicate butter shortbread dough.',
+        badge: 'Indulgent'
       },
       {
         id: 'SKU-006',
-        name: 'Gluten-Free Butter Shortbreads',
-        category: 'gluten-free',
-        category_label: 'Gluten-Free Range',
-        price: 9.00,
-        rating: 4.7,
-        reviews_count: 41,
-        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
-        description: 'Crafted with rice flour and tapioca flour, keeping the exact same buttery texture without any gluten.',
-        badge: 'Gluten-Free'
+        name: 'Biscoff Stuffed Cookie Box',
+        category: 'stuffed',
+        category_label: 'Stuffed Cookies',
+        price: 12.00,
+        rating: 4.9,
+        reviews_count: 110,
+        image: 'https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&w=600&q=80',
+        description: 'Soft cookies oozing with warm speculoos cookie butter and spiced crunch topping.',
+        badge: 'Trending'
       },
       {
         id: 'SKU-007',
-        name: 'Spiced Pistachio & Cardamom Cookies',
-        category: 'shortbread',
-        category_label: 'Classic Shortbread',
-        price: 11.20,
-        rating: 4.8,
-        reviews_count: 36,
-        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
-        description: 'Fragrant crushed pistachios and aromatic green cardamom baked into delicate melt-in-mouth rounds.',
+        name: 'Smoked Paprika & Gouda Wafers',
+        category: 'savory',
+        category_label: 'Savory Crackers',
+        price: 8.00,
+        rating: 4.7,
+        reviews_count: 35,
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+        description: 'Light, flaky cheese wafers infused with Spanish smoked paprika. Ideal for charcuterie boards.',
         badge: 'New'
       },
       {
         id: 'SKU-008',
-        name: 'Corporate Branded Logo Biscuits (Pack of 20)',
-        category: 'custom-iced',
-        category_label: 'Custom Hand-Iced',
-        price: 38.00,
-        rating: 4.9,
-        reviews_count: 75,
-        image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80',
-        description: 'Precision edible icing prints of your corporate logo on our signature butter sugar biscuits.',
-        badge: 'Corporate'
+        name: 'Gluten-Free Almond Melt-Aways',
+        category: 'vegan-gf',
+        category_label: 'Vegan & Gluten-Free',
+        price: 9.00,
+        rating: 4.8,
+        reviews_count: 53,
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+        description: 'Delicate almond flour biscuits dusted with powdered vanilla sugar. Completely gluten-free.',
+        badge: 'Gluten-Free'
       }
     ];
 
-    // State Variables
+    // State Management
     let cart = [];
     let activeCategory = 'all';
 
-    // UI Toast Notification
+    // Show Notification Toast
     function showNotification(msg) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-message');
@@ -909,23 +942,38 @@
       }, 3000);
     }
 
-    // Toggle Mobile Navigation Menu
+    // Toggle Mobile Navigation
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     }
 
-    // Render Products Grid
+    // Render Product Cards Grid
     function renderProducts() {
       const grid = document.getElementById('product-grid');
       const filtered = activeCategory === 'all' 
         ? PRODUCTS 
         : PRODUCTS.filter(p => p.category === activeCategory);
 
+      // Track view_item_list event
+      pushToDataLayer('view_item_list', {
+        item_list_name: activeCategory,
+        items: filtered.map((item, index) => ({
+          item_id: item.id,
+          item_name: item.name,
+          item_category: item.category_label,
+          price: item.price,
+          index: index + 1
+        }))
+      });
+
       grid.innerHTML = filtered.map(product => `
         <div class="bg-white rounded-2xl overflow-hidden border border-bakery-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
           <div class="relative h-48 overflow-hidden bg-bakery-100">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <img src="${product.image}" 
+                 onerror="handleImgError(this, '${product.name}')"
+                 alt="${product.name}" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-3 left-3 bg-bakery-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
               ${product.badge}
             </span>
@@ -948,7 +996,7 @@
             <div class="flex items-center justify-between pt-3 border-t border-bakery-100">
               <span class="text-lg font-bold text-bakery-900">£${product.price.toFixed(2)}</span>
               <button onclick="addToCart('${product.id}', 1)" 
-                      class="px-3.5 py-2 bg-bakery-800 text-white text-xs font-medium rounded-xl hover:bg-bakery-700 transition shadow-sm flex items-center space-x-1">
+                      class="px-3.5 py-2 bg-bakery-800 text-white text-xs font-medium rounded-xl hover:bg-accent transition shadow-sm flex items-center space-x-1">
                 <i class="fa-solid fa-cart-plus text-xs"></i>
                 <span>Add To Cart</span>
               </button>
@@ -962,13 +1010,11 @@
     function filterCategory(category, buttonEl) {
       activeCategory = category;
       
-      // DataLayer Event: select_item / view_item_list
       pushToDataLayer('select_item', {
         item_list_name: 'Category Filter',
         category_selected: category
       });
 
-      // Update Active Tab Styles
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('bg-bakery-800', 'text-white');
         btn.classList.add('bg-white', 'text-bakery-800');
@@ -979,7 +1025,7 @@
       renderProducts();
     }
 
-    // Add Item To Cart (With GA4 DataLayer add_to_cart tracking)
+    // Add Item To Cart
     function addToCart(productId, qty = 1) {
       const product = PRODUCTS.find(p => p.id === productId);
       if (!product) return;
@@ -988,13 +1034,9 @@
       if (existingItem) {
         existingItem.quantity += qty;
       } else {
-        cart.push({
-          ...product,
-          quantity: qty
-        });
+        cart.push({ ...product, quantity: qty });
       }
 
-      // GA4 DataLayer Event: add_to_cart
       pushToDataLayer('add_to_cart', {
         currency: 'GBP',
         value: product.price * qty,
@@ -1011,7 +1053,7 @@
       showNotification(`Added "${product.name}" to cart!`);
     }
 
-    // Remove or Reduce Quantity in Cart (With GA4 remove_from_cart tracking)
+    // Modify Item Quantity
     function updateCartQuantity(productId, newQty) {
       const itemIndex = cart.findIndex(item => item.id === productId);
       if (itemIndex === -1) return;
@@ -1019,7 +1061,6 @@
       const item = cart[itemIndex];
 
       if (newQty <= 0) {
-        // GA4 DataLayer Event: remove_from_cart
         pushToDataLayer('remove_from_cart', {
           currency: 'GBP',
           value: item.price * item.quantity,
@@ -1040,23 +1081,21 @@
       updateCartUI();
     }
 
-    // Update Cart UI Drawer elements
+    // Update Cart UI Drawer State
     function updateCartUI() {
       const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       const shipping = subtotal > 40 || subtotal === 0 ? 0 : 3.95;
       const total = subtotal + shipping;
 
-      // Badge Count
       document.getElementById('cart-badge-count').innerText = totalCount;
 
-      // Cart Items HTML
       const container = document.getElementById('cart-items-container');
       if (cart.length === 0) {
         container.innerHTML = `
           <div class="text-center py-12 text-bakery-500 space-y-3">
             <i class="fa-solid fa-basket-shopping text-4xl text-bakery-300"></i>
-            <p class="text-sm font-medium">Your biscuit basket is empty</p>
+            <p class="text-xs font-medium">Your biscuit basket is empty</p>
             <a href="#products" onclick="closeCartDrawer()" class="inline-block text-xs text-bakery-800 underline font-semibold">Start Shopping</a>
           </div>
         `;
@@ -1065,10 +1104,10 @@
         document.getElementById('checkout-cta-btn').disabled = false;
         container.innerHTML = cart.map(item => `
           <div class="flex items-center space-x-3 bg-bakery-50 p-3 rounded-xl border border-bakery-200">
-            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+            <img src="${item.image}" onerror="handleImgError(this, '${item.name}')" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg">
             <div class="flex-1">
               <h4 class="text-xs font-bold text-bakery-900">${item.name}</h4>
-              <span class="text-xs text-bakery-600">£${item.price.toFixed(2)} each</span>
+              <span class="text-[11px] text-bakery-600">£${item.price.toFixed(2)} each</span>
               <div class="flex items-center space-x-2 mt-1">
                 <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})" class="w-5 h-5 bg-white border border-bakery-300 rounded flex items-center justify-center text-xs font-bold hover:bg-bakery-200">-</button>
                 <span class="text-xs font-bold px-1">${item.quantity}</span>
@@ -1083,14 +1122,13 @@
         `).join('');
       }
 
-      // Update Summary Text
       document.getElementById('cart-subtotal-text').innerText = `£${subtotal.toFixed(2)}`;
       document.getElementById('cart-shipping-text').innerText = shipping === 0 ? 'FREE' : `£${shipping.toFixed(2)}`;
       document.getElementById('cart-total-text').innerText = `£${total.toFixed(2)}`;
       document.getElementById('checkout-modal-total').innerText = `£${total.toFixed(2)}`;
     }
 
-    // Open & Close Cart Drawer
+    // Open/Close Cart Drawer
     function openCartDrawer() {
       const overlay = document.getElementById('cart-drawer-overlay');
       const drawer = document.getElementById('cart-drawer');
@@ -1100,7 +1138,6 @@
         drawer.classList.remove('translate-x-full');
       }, 10);
 
-      // DataLayer Event: view_cart
       pushToDataLayer('view_cart', {
         currency: 'GBP',
         value: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
@@ -1118,9 +1155,7 @@
       const drawer = document.getElementById('cart-drawer');
       drawer.classList.add('translate-x-full');
       overlay.classList.add('opacity-0');
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-      }, 300);
+      setTimeout(() => { overlay.classList.add('hidden'); }, 300);
     }
 
     // Quick View Modal
@@ -1128,7 +1163,6 @@
       const product = PRODUCTS.find(p => p.id === productId);
       if (!product) return;
 
-      // DataLayer Event: view_item
       pushToDataLayer('view_item', {
         currency: 'GBP',
         value: product.price,
@@ -1143,7 +1177,7 @@
       const modalContent = document.getElementById('quickview-content');
       modalContent.innerHTML = `
         <div class="h-64 sm:h-full bg-bakery-100">
-          <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          <img src="${product.image}" onerror="handleImgError(this, '${product.name}')" alt="${product.name}" class="w-full h-full object-cover">
         </div>
         <div class="p-6 flex flex-col justify-between space-y-4">
           <div>
@@ -1159,7 +1193,7 @@
             </div>
 
             <button onclick="addToCart('${product.id}', 1); closeQuickView();" 
-                    class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-bakery-700 transition flex justify-center items-center space-x-2 shadow-md">
+                    class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-accent transition flex justify-center items-center space-x-2 shadow-md">
               <i class="fa-solid fa-bag-shopping"></i>
               <span>Add to Basket</span>
             </button>
@@ -1174,14 +1208,13 @@
       document.getElementById('quickview-modal').classList.add('hidden');
     }
 
-    // Checkout Flow Functions
+    // Checkout Flow
     function startCheckout() {
       if (cart.length === 0) return;
       closeCartDrawer();
 
       const totalVal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-      // DataLayer Event: begin_checkout
       pushToDataLayer('begin_checkout', {
         currency: 'GBP',
         value: totalVal,
@@ -1200,7 +1233,6 @@
       document.getElementById('checkout-modal').classList.add('hidden');
     }
 
-    // Track Shipping and Payment Step Inputs
     function trackCheckoutStep(eventName, stepDetail) {
       pushToDataLayer(eventName, {
         step_detail: stepDetail,
@@ -1209,7 +1241,6 @@
       });
     }
 
-    // Complete Purchase Event
     function handlePurchaseSubmit(event) {
       event.preventDefault();
 
@@ -1218,7 +1249,6 @@
       const total = subtotal + shipping;
       const transactionId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
 
-      // GA4 DataLayer Event: purchase
       pushToDataLayer('purchase', {
         transaction_id: transactionId,
         value: total,
@@ -1234,12 +1264,10 @@
         }))
       });
 
-      // Update Order Complete UI
       document.getElementById('order-ref-id').innerText = '#' + transactionId;
       document.getElementById('order-ref-count').innerText = `${cart.reduce((s, i) => s + i.quantity, 0)} items`;
       document.getElementById('order-ref-total').innerText = `£${total.toFixed(2)}`;
 
-      // Clear Cart
       cart = [];
       updateCartUI();
 
@@ -1251,7 +1279,6 @@
       document.getElementById('order-complete-modal').classList.add('hidden');
     }
 
-    // Track Form Field Focus / Changes
     function trackFormField(formId, fieldName, actionType) {
       pushToDataLayer('form_field_interaction', {
         form_id: formId,
@@ -1260,59 +1287,59 @@
       });
     }
 
-    // Custom Quote Price Estimate Calculator
+    // Interactive Custom Quote Price Estimator Calculator
     function updateQuoteEstimate() {
-      const qty = parseInt(document.getElementById('quote-quantity').value, 10);
-      let unitPrice = 2.50;
-      if (qty >= 250) unitPrice = 2.00;
-      if (qty >= 500) unitPrice = 1.80;
-      if (qty >= 1000) unitPrice = 1.50;
+      const qty = parseInt(document.getElementById('quote-qty-slider').value, 10);
+      const styleMultiplier = parseFloat(document.getElementById('quote-style').value);
+      const pkgAddon = parseFloat(document.getElementById('quote-packaging').value);
 
-      const totalEstimate = qty * unitPrice;
+      document.getElementById('qty-slider-val').innerText = `${qty.toLocaleString()} units`;
+
+      // Tiered base price per biscuit
+      let basePrice = 2.20;
+      if (qty >= 500) basePrice = 1.80;
+      if (qty >= 1000) basePrice = 1.50;
+      if (qty >= 2500) basePrice = 1.20;
+
+      const pricePerUnit = (basePrice * styleMultiplier) + pkgAddon;
+      const totalEstimate = qty * pricePerUnit;
+
       document.getElementById('quote-estimate-price').innerHTML = `
-        £${totalEstimate.toFixed(2)} <span class="text-xs font-normal text-bakery-600">(£${unitPrice.toFixed(2)} / unit)</span>
+        £${totalEstimate.toFixed(2)} <span class="text-xs font-normal text-bakery-600">(£${pricePerUnit.toFixed(2)} / unit)</span>
       `;
     }
 
-    // Handle Custom Quote Form Submit
     function handleQuoteSubmit(event) {
       event.preventDefault();
       
+      const qty = document.getElementById('quote-qty-slider').value;
       const name = document.getElementById('quote-name').value;
       const email = document.getElementById('quote-email').value;
-      const eventType = document.getElementById('quote-event').value;
-      const quantity = document.getElementById('quote-quantity').value;
 
-      // DataLayer Event: form_submit / generate_lead
-      pushToDataLayer('form_submit', {
-        form_name: 'custom_quote_inquiry',
+      pushToDataLayer('generate_lead', {
+        form_name: 'custom_quote_calculator',
         lead_type: 'corporate_quote',
-        event_type: eventType,
-        quantity: quantity,
-        user_email_hash: 'sha256_mock_hash'
+        quantity: qty,
+        user_email: email
       });
 
-      showNotification('Thank you! Custom quote request submitted.');
+      showNotification('Quote request submitted! Our bakery team will reach out shortly.');
       document.getElementById('custom-quote-form').reset();
       updateQuoteEstimate();
     }
 
-    // Handle Newsletter Signup
     function handleNewsletterSubmit(event) {
       event.preventDefault();
-      const email = document.getElementById('newsletter-email').value;
-
-      // DataLayer Event: generate_lead
       pushToDataLayer('generate_lead', {
         form_name: 'newsletter_signup',
-        lead_source: 'footer_club'
+        lead_source: 'footer'
       });
 
-      showNotification('Subscribed! Check your email for your 10% discount code.');
+      showNotification('Subscribed! Check your inbox for your 10% promo code.');
       document.getElementById('newsletter-form').reset();
     }
 
-    // DataLayer Event Debugger Panel Toggle and Logger
+    // DataLayer Event Debugger Panel
     function toggleDebugPanel() {
       const panel = document.getElementById('debug-panel');
       panel.classList.toggle('hidden');
@@ -1320,7 +1347,7 @@
 
     function clearDebugLogs() {
       const logList = document.getElementById('debug-log-list');
-      logList.innerHTML = '<div class="text-zinc-500 italic text-[10px]">Logs cleared. Perform interactions to see new events...</div>';
+      logList.innerHTML = '<div class="text-zinc-500 italic text-[10px]">Logs cleared. Perform interactions on the site to trigger GA4 events...</div>';
     }
 
     window.addDebugLog = function(eventName, payload) {
@@ -1342,17 +1369,11 @@
       logList.prepend(logItem);
     };
 
-    // On Window Load Initialization
+    // Initialize Page
     window.onload = function() {
       renderProducts();
       updateCartUI();
-      // Add initial debug marker
-      if (window.addDebugLog) {
-        window.addDebugLog('page_view', {
-          title: 'Artisan Biscuit Co. Store',
-          status: 'GA4 Tracking Active'
-        });
-      }
+      updateQuoteEstimate();
     };
   </script>
 </body>
