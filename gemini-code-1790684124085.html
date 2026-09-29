@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Biscuit Box | GTM Training Sandbox</title>
+
+  <!-- 1. INITIALIZE DATALAYER (Must be above GTM snippet) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- 2. GOOGLE TAG MANAGER CONTAINER SNIPPET (Replace GTM-XXXXXXX) -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+
+  <style>
+    :root {
+      --primary: #d27d2d;
+      --bg: #fdf8f5;
+      --surface: #ffffff;
+      --text: #3e2723;
+      --border: #e0d0c1;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid white;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    nav button:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .card img {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    button.btn-action {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    button.btn-action:hover {
+      opacity: 0.9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    /* Console DataLayer Inspector Box */
+    #dl-inspector {
+      background: #1e1e1e;
+      color: #00ff66;
+      padding: 1rem;
+      margin-top: 3rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header>
+    <h1>🍪 The Biscuit Box</h1>
+    <nav>
+      <button onclick="navigate('category')">Category</button>
+      <button onclick="navigate('cart')">Basket (<span id="cart-count">0</span>)</button>
+      <button onclick="navigate('account')">My Account</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE 1: CATEGORY PAGE -->
+    <section id="page-category" class="page active">
+      <h2>Our Premium Biscuit Selection</h2>
+      <div class="grid" id="product-grid"></div>
+    </section>
+
+    <!-- PAGE 2: PRODUCT DETAIL PAGE -->
+    <section id="page-product" class="page">
+      <button onclick="navigate('category')">← Back to Category</button>
+      <div id="product-detail-content" style="margin-top: 1rem;"></div>
+    </section>
+
+    <!-- PAGE 3: BASKET / CART -->
+    <section id="page-cart" class="page">
+      <h2>Your Biscuit Basket</h2>
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th>Biscuit</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+      </table>
+      <div style="text-align: right;">
+        <h3>Total: £<span id="cart-total">0.00</span></h3>
+        <button class="btn-action" onclick="proceedToCheckout()">Begin Checkout</button>
+      </div>
+    </section>
+
+    <!-- PAGE 4: CHECKOUT / PURCHASE -->
+    <section id="page-checkout" class="page">
+      <h2>Checkout & Order Completion</h2>
+      <p>Simulate placing an order to trigger the <code>purchase</code> event.</p>
+      <button class="btn-action" onclick="completePurchase()">Complete Purchase (£<span id="checkout-total">0.00</span>)</button>
+    </section>
+
+    <!-- PAGE 5: MY ACCOUNT -->
+    <section id="page-account" class="page">
+      <h2>My Account</h2>
+      <div id="login-section">
+        <p>Log in to track custom user data layer events and properties.</p>
+        <button class="btn-action" onclick="simulateLogin()">Log In as Biscuit Fan</button>
+      </div>
+      <div id="user-section" style="display:none;">
+        <p>Welcome back, <strong>biscuit_lover_99</strong>!</p>
+        <p>Membership Level: <strong>Gold Crumb Member</strong></p>
+        <button onclick="simulateLogout()">Log Out</button>
+      </div>
+    </section>
+
+    <!-- Live DataLayer Output Preview for Training -->
+    <div id="dl-inspector">
+      <strong>Latest dataLayer.push():</strong>
+      <pre id="dl-output">Initializing...</pre>
+    </div>
+  </main>
+
+  <script>
+    // --- CATALOG DATA ---
+    const products = [
+      { id: "BSC_001", name: "Chocolate Digestive", price: 2.50, category: "Chocolate", icon: "🍫" },
+      { id: "BSC_002", name: "Jammy Dodger", price: 1.80, category: "Jam & Cream", icon: "🍓" },
+      { id: "BSC_003", name: "Rich Tea", price: 1.20, category: "Plain & Everyday", icon: "☕" },
+      { id: "BSC_004", name: "Bourbon Cream", price: 2.00, category: "Jam & Cream", icon: "🍪" }
+    ];
+
+    let cart = [];
+    let currentProduct = null;
+
+    // Helper: Push and log dataLayer events
+    function pushToDataLayer(payload) {
+      window.dataLayer.push(payload);
+      document.getElementById("dl-output").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    // --- NAVIGATION CONTROLLER ---
+    function navigate(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(`page-${pageId}`).classList.add("active");
+
+      if (pageId === "category") {
+        renderCategoryPage();
+      } else if (pageId === "cart") {
+        renderCartPage();
+      }
+    }
+
+    // --- CATEGORY PAGE (view_item_list) ---
+    function renderCategoryPage() {
+      const grid = document.getElementById("product-grid");
+      grid.innerHTML = "";
+
+      products.forEach((p, idx) => {
+        grid.innerHTML += `
+          <div class="card">
+            <div>${p.icon}</div>
+            <h3>${p.name}</h3>
+            <p>Category: ${p.category}</p>
+            <p><strong>£${p.price.toFixed(2)}</strong></p>
+            <button class="btn-action" onclick="viewProduct('${p.id}')">View Details</button>
+          </div>
+        `;
+      });
+
+      // DataLayer: view_item_list
+      pushToDataLayer({ ecommerce: null }); // Clear previous
+      pushToDataLayer({
+        event: "view_item_list",
+        ecommerce: {
+          item_list_id: "all_biscuits",
+          item_list_name: "All Biscuits Category",
+          items: products.map((p, index) => ({
+            item_id: p.id,
+            item_name: p.name,
+            price: p.price,
+            item_category: p.category,
+            index: index + 1
+          }))
+        }
+      });
+    }
+
+    // --- PRODUCT DETAIL PAGE (view_item) ---
+    function viewProduct(productId) {
+      currentProduct = products.find(p => p.id === productId);
+      const container = document.getElementById("product-detail-content");
+
+      container.innerHTML = `
+        <div class="card" style="max-width:400px; margin:auto;">
+          <div style="font-size: 4rem;">${currentProduct.icon}</div>
+          <h2>${currentProduct.name}</h2>
+          <p>Category: ${currentProduct.category}</p>
+          <p style="font-size:1.4rem;"><strong>£${currentProduct.price.toFixed(2)}</strong></p>
+          <button class="btn-action" onclick="addToCart()">Add to Basket</button>
+        </div>
+      `;
+
+      navigate("product");
+
+      // DataLayer: view_item
+      pushToDataLayer({ ecommerce: null });
+      pushToDataLayer({
+        event: "view_item",
+        ecommerce: {
+          currency: "GBP",
+          value: currentProduct.price,
+          items: [{
+            item_id: currentProduct.id,
+            item_name: currentProduct.name,
+            price: currentProduct.price,
+            item_category: currentProduct.category
+          }]
+        }
+      });
+    }
+
+    // --- ADD TO CART (add_to_cart) ---
+    function addToCart() {
+      const existing = cart.find(item => item.id === currentProduct.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...currentProduct, qty: 1 });
+      }
+
+      updateCartCount();
+
+      // DataLayer: add_to_cart
+      pushToDataLayer({ ecommerce: null });
+      pushToDataLayer({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: "GBP",
+          value: currentProduct.price,
+          items: [{
+            item_id: currentProduct.id,
+            item_name: currentProduct.name,
+            price: currentProduct.price,
+            item_category: currentProduct.category,
+            quantity: 1
+          }]
+        }
+      });
+
+      alert(`${currentProduct.name} added to basket!`);
+    }
+
+    // --- REMOVE FROM CART (remove_from_cart) ---
+    function removeFromCart(productId) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index > -1) {
+        const removed = cart[index];
+        cart.splice(index, 1);
+        updateCartCount();
+        renderCartPage();
+
+        // DataLayer: remove_from_cart
+        pushToDataLayer({ ecommerce: null });
+        pushToDataLayer({
+          event: "remove_from_cart",
+          ecommerce: {
+            currency: "GBP",
+            value: removed.price * removed.qty,
+            items: [{
+              item_id: removed.id,
+              item_name: removed.name,
+              price: removed.price,
+              quantity: removed.qty
+            }]
+          }
+        });
+      }
+    }
+
+    function updateCartCount() {
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById("cart-count").textContent = totalCount;
+    }
+
+    // --- BASKET VIEW PAGE (view_cart) ---
+    function renderCartPage() {
+      const tbody = document.getElementById("cart-items");
+      tbody.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.icon} ${item.name}</td>
+            <td>£${item.price.toFixed(2)}</td>
+            <td>${item.qty}</td>
+            <td><button onclick="removeFromCart('${item.id}')">Remove</button></td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("cart-total").textContent = total.toFixed(2);
+      document.getElementById("checkout-total").textContent = total.toFixed(2);
+
+      // DataLayer: view_cart
+      pushToDataLayer({ ecommerce: null });
+      pushToDataLayer({
+        event: "view_cart",
+        ecommerce: {
+          currency: "GBP",
+          value: total,
+          items: cart.map(item => ({
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: item.qty
+          }))
+        }
+      });
+    }
+
+    // --- BEGIN CHECKOUT (begin_checkout) ---
+    function proceedToCheckout() {
+      if (cart.length === 0) {
+        alert("Your basket is empty!");
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      navigate("checkout");
+
+      // DataLayer: begin_checkout
+      pushToDataLayer({ ecommerce: null });
+      pushToDataLayer({
+        event: "begin_checkout",
+        ecommerce: {
+          currency: "GBP",
+          value: total,
+          items: cart.map(item => ({
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: item.qty
+          }))
+        }
+      });
+    }
+
+    // --- COMPLETE PURCHASE (purchase) ---
+    function completePurchase() {
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const transactionId = "T_" + Math.floor(100000 + Math.random() * 900000);
+
+      // DataLayer: purchase
+      pushToDataLayer({ ecommerce: null });
+      pushToDataLayer({
+        event: "purchase",
+        ecommerce: {
+          transaction_id: transactionId,
+          value: total + 1.50, // total + shipping
+          tax: 0.00,
+          shipping: 1.50,
+          currency: "GBP",
+          items: cart.map(item => ({
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: item.qty
+          }))
+        }
+      });
+
+      alert(`Purchase Complete! Transaction ID: ${transactionId}`);
+      cart = [];
+      updateCartCount();
+      navigate("category");
+    }
+
+    // --- ACCOUNT / LOGIN ACTIONS ---
+    function simulateLogin() {
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("user-section").style.display = "block";
+
+      pushToDataLayer({
+        event: "login",
+        method: "Password",
+        user_id: "USR_BISCUIT_99",
+        user_properties: {
+          membership_tier: "Gold Crumb",
+          logged_in: true
+        }
+      });
+    }
+
+    function simulateLogout() {
+      document.getElementById("login-section").style.display = "block";
+      document.getElementById("user-section").style.display = "none";
+
+      pushToDataLayer({
+        event: "logout",
+        user_properties: {
+          logged_in: false
+        }
+      });
+    }
+
+    // Initialize page
+    renderCategoryPage();
+  </script>
+</body>
+</html>
