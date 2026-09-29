@@ -1,771 +1,1359 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisan Biscuit Co. | Handcrafted Custom & Wholesale Biscuits</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FDFBF7',
-                        'cream-dark': '#F5EFE6',
-                        biscuit: {
-                            100: '#FAF0E4',
-                            200: '#E8D2B8',
-                            300: '#D4B28C',
-                            400: '#C19360',
-                            500: '#B07B42',
-                            600: '#8F5C2C',
-                        },
-                        chocolate: {
-                            800: '#3D251E',
-                            900: '#231511'
-                        },
-                        amber: {
-                            gold: '#D97706'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artisan Biscuit Co. | Handcrafted Gourmet Biscuits & Custom Treats</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bakery: {
+              50: '#fdfbf7',
+              100: '#f7f2e8',
+              200: '#eee3d0',
+              300: '#e1cdb0',
+              400: '#cfac7f',
+              500: '#bd8b52',
+              600: '#aa7342',
+              700: '#8c5a35',
+              800: '#724930',
+              900: '#5e3d2a',
+              dark: '#2c1a10',
+            },
+            accent: '#d97706',
+            gold: '#d4af37'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Georgia', 'serif'],
+          }
         }
-    </script>
-    <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(232, 210, 184, 0.3);
-        }
-        .hero-pattern {
-            background-color: #FDFBF7;
-            background-image: radial-gradient(#D4B28C 0.6px, transparent 0.6px), radial-gradient(#D4B28C 0.6px, #FDFBF7 0.6px);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            background-opacity: 0.15;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #C19360;
-            border-radius: 9999px;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdfbf7;
+      color: #2c1a10;
+    }
+    .font-serif-title {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    /* Custom Scrollbar for Debug Panel */
+    .debug-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .debug-scroll::-webkit-scrollbar-track {
+      background: #1e1e1e;
+    }
+    .debug-scroll::-webkit-scrollbar-thumb {
+      background: #4a4a4a;
+      border-radius: 3px;
+    }
+  </style>
 </head>
-<body class="bg-cream text-chocolate-900 font-sans antialiased selection:bg-biscuit-300 selection:text-chocolate-900">
+<body class="min-h-screen flex flex-col relative selection:bg-bakery-200 selection:text-bakery-900">
 
-    <!-- Sticky Navigation Bar -->
-    <header class="sticky top-0 z-50 glass-card border-b border-biscuit-200 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <a href="#" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 rounded-full bg-biscuit-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                            <circle cx="8.5" cy="8.5" r="1.2"/>
-                            <circle cx="15.5" cy="8.5" r="1.2"/>
-                            <circle cx="12" cy="12" r="1.2"/>
-                            <circle cx="9.5" cy="15.5" r="1.2"/>
-                            <circle cx="14.5" cy="15.5" r="1.2"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="font-serif font-bold text-xl sm:text-2xl text-chocolate-900 block leading-none">The Artisan</span>
-                        <span class="text-xs uppercase tracking-widest text-biscuit-600 font-semibold">Biscuit Co.</span>
-                    </div>
-                </a>
+  <script>
+    // Initialize DataLayer
+    window.dataLayer = window.dataLayer || [];
 
-                <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="#about" class="text-chocolate-800 hover:text-biscuit-600 transition-colors">Why Us</a>
-                    <a href="#flavors" class="text-chocolate-800 hover:text-biscuit-600 transition-colors">Flavor Range</a>
-                    <a href="#testimonials" class="text-chocolate-800 hover:text-biscuit-600 transition-colors">Reviews</a>
-                    <a href="#quote-calculator" class="text-chocolate-800 hover:text-biscuit-600 transition-colors">Instant Estimator</a>
-                </nav>
+    // DataLayer Helper with Console Logging & UI Event Debugger stream
+    function pushToDataLayer(eventName, eventParams = {}) {
+      const payload = {
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        ...eventParams
+      };
+      
+      // Push to standard GTM dataLayer
+      window.dataLayer.push(payload);
+      
+      // Console logging for verification
+      console.log(`[DataLayer Push] 🚀 Event: "${eventName}"`, payload);
 
-                <!-- Actions -->
-                <div class="hidden sm:flex items-center space-x-4">
-                    <a href="#quote-calculator" class="bg-biscuit-500 hover:bg-biscuit-600 text-white font-semibold px-5 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
-                        Request a Quote
-                    </a>
-                </div>
+      // Append to visible Debugger Inspector in UI
+      if (window.addDebugLog) {
+        window.addDebugLog(eventName, payload);
+      }
+    }
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-chocolate-800 hover:text-biscuit-600 focus:outline-none p-2">
-                        <svg class="w-6 h-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    // Page View Tracking
+    window.addEventListener('DOMContentLoaded', () => {
+      pushToDataLayer('page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    });
+  </script>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-bakery-900 text-bakery-100 text-xs py-2 px-4 text-center flex justify-between items-center max-w-full">
+    <div class="hidden sm:block text-bakery-300">🌿 100% Organic Ingredients | Free UK Shipping over £40</div>
+    <div class="mx-auto sm:mx-0">✨ Use Code <span class="font-bold text-gold">ARTISAN10</span> for 10% Off Your First Order</div>
+    <a href="#quote-section" 
+       onclick="pushToDataLayer('cta_click', { cta_id: 'top_banner_quote', cta_text: 'Corporate Orders', destination: '#quote-section' })"
+       class="hidden md:inline-block underline text-bakery-200 hover:text-white transition">
+       Corporate Orders &amp; Custom Printing →
+    </a>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-40 bg-bakery-50/95 backdrop-blur-md border-b border-bakery-200 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" 
+                onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_menu_toggle', cta_text: 'Mobile Menu' });"
+                class="md:hidden text-bakery-800 p-2 rounded-lg hover:bg-bakery-100 focus:outline-none">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+
+        <!-- Brand Logo -->
+        <a href="#" 
+           onclick="pushToDataLayer('cta_click', { cta_id: 'brand_logo', cta_text: 'Artisan Biscuit Co.', destination: '#' })"
+           class="flex items-center space-x-3 group">
+          <div class="w-10 h-10 rounded-full bg-bakery-700 text-bakery-50 flex items-center justify-center font-serif-title font-bold text-xl shadow-md group-hover:bg-bakery-600 transition">
+            A
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif-title text-xl font-bold tracking-tight text-bakery-900">Artisan Biscuit Co.</span>
+            <span class="text-[10px] tracking-widest uppercase text-bakery-600 font-semibold">Bakers &amp; Confectioners</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8 text-sm font-medium text-bakery-800">
+          <a href="#products" 
+             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_shop', cta_text: 'Shop Bakery', destination: '#products' })" 
+             class="hover:text-bakery-600 transition">Shop Bakery</a>
+          <a href="#quote-section" 
+             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_custom_quote', cta_text: 'Custom Orders', destination: '#quote-section' })" 
+             class="hover:text-bakery-600 transition">Custom &amp; Corporate</a>
+          <a href="#testimonials" 
+             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_reviews', cta_text: 'Reviews', destination: '#testimonials' })" 
+             class="hover:text-bakery-600 transition">Reviews</a>
+          <a href="#about" 
+             onclick="pushToDataLayer('cta_click', { cta_id: 'nav_about', cta_text: 'Our Story', destination: '#about' })" 
+             class="hover:text-bakery-600 transition">Our Story</a>
+        </nav>
+
+        <!-- Header Actions: Debugger Badge, Search, Cart Drawer Toggle -->
+        <div class="flex items-center space-x-3 sm:space-x-4">
+          <!-- DataLayer Debug Console Toggle -->
+          <button onclick="toggleDebugPanel(); pushToDataLayer('cta_click', { cta_id: 'toggle_dataLayer_inspector', cta_text: 'DataLayer Inspector' });" 
+                  class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200 transition shadow-sm"
+                  title="Click to view live GA4 DataLayer stream">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="hidden sm:inline">DataLayer Live</span>
+            <i class="fa-solid fa-code text-xs"></i>
+          </button>
+
+          <!-- Wishlist / Search Button Placeholder -->
+          <button onclick="pushToDataLayer('cta_click', { cta_id: 'header_search', cta_text: 'Search' }); showNotification('Search modal opened (DataLayer tracked)');" 
+                  class="text-bakery-700 hover:text-bakery-900 p-2 rounded-full hover:bg-bakery-100 transition">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+          </button>
+
+          <!-- Slide-out Cart Button -->
+          <button id="cart-btn" 
+                  onclick="openCartDrawer()" 
+                  class="relative bg-bakery-800 text-white px-3.5 py-2 rounded-xl hover:bg-bakery-700 transition flex items-center space-x-2 shadow-sm">
+            <i class="fa-solid fa-bag-shopping text-base"></i>
+            <span class="hidden sm:inline text-sm font-medium">Cart</span>
+            <span id="cart-badge-count" class="bg-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          </button>
         </div>
 
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-cream-dark border-t border-biscuit-200 px-4 pt-3 pb-6 space-y-3">
-            <a href="#about" class="block py-2 text-chocolate-800 font-medium border-b border-biscuit-200/50">Why Us</a>
-            <a href="#flavors" class="block py-2 text-chocolate-800 font-medium border-b border-biscuit-200/50">Flavor Range</a>
-            <a href="#testimonials" class="block py-2 text-chocolate-800 font-medium border-b border-biscuit-200/50">Reviews</a>
-            <a href="#quote-calculator" class="block py-2 text-chocolate-800 font-medium border-b border-biscuit-200/50">Instant Estimator</a>
-            <a href="#quote-calculator" class="block text-center w-full mt-2 bg-biscuit-500 text-white font-semibold py-3 rounded-xl shadow">Request a Quote</a>
-        </div>
-    </header>
+      </div>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="relative hero-pattern pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Left Content Column -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <!-- Badge Tag -->
-                    <div class="inline-flex items-center space-x-2 bg-biscuit-100 border border-biscuit-300/50 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-biscuit-600">
-                        <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>Award-Winning Artisan Bakery & Wholesale Partner</span>
-                    </div>
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-bakery-200 bg-bakery-50 px-4 pt-3 pb-6 space-y-3">
+      <a href="#products" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_shop', cta_text: 'Shop Bakery' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Shop Bakery</a>
+      <a href="#quote-section" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_quote', cta_text: 'Custom Orders' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Custom &amp; Corporate Orders</a>
+      <a href="#testimonials" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_reviews', cta_text: 'Reviews' });" class="block py-2 text-bakery-800 font-medium border-b border-bakery-100">Reviews &amp; Press</a>
+      <a href="#about" onclick="toggleMobileMenu(); pushToDataLayer('cta_click', { cta_id: 'mobile_nav_about', cta_text: 'Our Story' });" class="block py-2 text-bakery-800 font-medium">Our Story</a>
+    </div>
+  </header>
 
-                    <!-- Main Headline -->
-                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-chocolate-900 tracking-tight leading-tight">
-                        Handcrafted Biscuits for <span class="italic font-normal text-biscuit-500">Unforgettable</span> Occasions.
-                    </h1>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-b from-bakery-100 via-bakery-50 to-white pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-bakery-200/70 text-bakery-800 text-xs font-semibold tracking-wide uppercase">
+            <i class="fa-solid fa-award text-gold"></i>
+            <span>Award-Winning Handmade Shortbreads &amp; Custom Biscuits</span>
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-bold text-bakery-dark leading-tight">
+            Handcrafted with Passion. <br class="hidden sm:inline"/>
+            <span class="text-bakery-600 italic">Baked to Order.</span>
+          </h1>
+          
+          <p class="text-lg text-bakery-800 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Discover our buttery melt-in-your-mouth luxury shortbreads, hand-iced celebration cookies, and bespoke branded corporate biscuits baked fresh daily in our Cotswolds kitchen.
+          </p>
 
-                    <p class="text-lg text-chocolate-800/80 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        From custom branded corporate gifts to bespoke luxury event spreads and wholesale cafe supplies. Baked fresh daily using 100% natural, locally sourced ingredients.
-                    </p>
+          <!-- Action CTAs -->
+          <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
+            <a href="#products" 
+               onclick="pushToDataLayer('cta_click', { cta_id: 'hero_shop_collection', cta_text: 'Shop Collection', destination: '#products' })" 
+               class="px-8 py-4 bg-bakery-800 text-white font-medium rounded-xl shadow-lg hover:bg-bakery-700 hover:shadow-xl transition transform active:scale-95 text-center flex items-center justify-center space-x-2">
+              <span>Shop Collection</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+            
+            <a href="#quote-section" 
+               onclick="pushToDataLayer('cta_click', { cta_id: 'hero_get_custom_quote', cta_text: 'Get Custom Quote', destination: '#quote-section' })" 
+               class="px-8 py-4 bg-white text-bakery-900 border-2 border-bakery-300 font-medium rounded-xl hover:bg-bakery-100 transition text-center shadow-sm flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-wand-magic-sparkles text-bakery-600"></i>
+              <span>Get Custom Quote</span>
+            </a>
+          </div>
 
-                    <!-- CTAs -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#quote-calculator" class="w-full sm:w-auto text-center bg-biscuit-500 hover:bg-biscuit-600 text-white font-bold px-8 py-4 rounded-full text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
-                            Request Custom Quote
-                        </a>
-                        <a href="#flavors" class="w-full sm:w-auto text-center bg-white hover:bg-biscuit-100 text-chocolate-800 font-semibold px-8 py-4 rounded-full text-base border border-biscuit-300 shadow-sm transition-all duration-300">
-                            Explore Flavor Gallery
-                        </a>
-                    </div>
-
-                    <!-- Social Proof / Stats -->
-                    <div class="pt-8 border-t border-biscuit-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
-                        <div>
-                            <p class="font-serif font-bold text-2xl sm:text-3xl text-chocolate-900">500k+</p>
-                            <p class="text-xs text-chocolate-800/70 font-medium uppercase tracking-wider mt-0.5">Baked Annually</p>
-                        </div>
-                        <div>
-                            <p class="font-serif font-bold text-2xl sm:text-3xl text-chocolate-900">4.9 ★</p>
-                            <p class="text-xs text-chocolate-800/70 font-medium uppercase tracking-wider mt-0.5">Client Rating</p>
-                        </div>
-                        <div>
-                            <p class="font-serif font-bold text-2xl sm:text-3xl text-chocolate-900">100%</p>
-                            <p class="text-xs text-chocolate-800/70 font-medium uppercase tracking-wider mt-0.5">Natural Ingredients</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Visual Column -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <!-- Background Glow Effect -->
-                        <div class="absolute -inset-4 bg-gradient-to-r from-biscuit-300 to-biscuit-500 rounded-3xl blur-2xl opacity-20 transform -rotate-3"></div>
-                        
-                        <!-- Hero Image Card -->
-                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-cream-dark">
-                            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1000&q=80" 
-                                 alt="Gourmet Artisan Biscuits" 
-                                 class="w-full h-[420px] object-cover object-center transform hover:scale-105 transition-transform duration-700"
-                                 onerror="this.src='https://placehold.co/800x600/E8D2B8/231511?text=Gourmet+Artisan+Biscuits'"
-                            >
-                            
-                            <!-- Overlay Floating Card 1 -->
-                            <div class="absolute bottom-4 left-4 right-4 glass-card p-4 rounded-2xl shadow-xl flex items-center space-x-4">
-                                <div class="w-12 h-12 rounded-xl bg-amber-gold/20 flex items-center justify-center flex-shrink-0 text-biscuit-600">
-                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-chocolate-900 text-sm">Bespoke Corporate Embossing</h4>
-                                    <p class="text-xs text-chocolate-800/80">Custom logos, monograms & custom shapes available.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+          <!-- Social Proof Pill -->
+          <div class="pt-6 flex items-center justify-center lg:justify-start space-x-4 text-xs text-bakery-700">
+            <div class="flex text-amber-500">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
+            <span class="font-semibold text-bakery-900">4.9 / 5.0</span>
+            <span class="text-bakery-500">•</span>
+            <span>Over 12,000+ Happy Customers &amp; Wedding Couples</span>
+          </div>
+
         </div>
-    </section>
 
-    <!-- Features / Value Propositions -->
-    <section id="about" class="py-16 bg-white border-y border-biscuit-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-xs uppercase tracking-widest text-biscuit-600 font-bold mb-2">Why Partner With Us</h2>
-                <p class="font-serif text-3xl sm:text-4xl font-bold text-chocolate-900">Craftsmanship In Every Single Byte</p>
+        <!-- Hero Visual Showcase Card -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-bakery-200 group">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80" 
+                 alt="Freshly baked artisan biscuits" 
+                 class="w-full h-96 sm:h-[450px] object-cover transform group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-bakery-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+              <span class="bg-accent text-white text-xs font-bold uppercase px-3 py-1 rounded-full w-max mb-2">Bestseller Box</span>
+              <h3 class="font-serif-title text-2xl font-bold">The Heritage Shortbread Hamper</h3>
+              <p class="text-xs text-bakery-100 mt-1">Rich butter, French sea salt, and lavender infused shortbreads.</p>
             </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature 1 -->
-                <div class="p-6 rounded-2xl bg-cream border border-biscuit-200/60 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-biscuit-100 text-biscuit-600 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-chocolate-900 text-lg mb-2">100% Organic Butter</h3>
-                    <p class="text-sm text-chocolate-800/80 leading-relaxed">Made exclusively with grass-fed churned butter, organic flour, and fair-trade single-origin vanilla.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="p-6 rounded-2xl bg-cream border border-biscuit-200/60 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-biscuit-100 text-biscuit-600 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-chocolate-900 text-lg mb-2">Custom Branding</h3>
-                    <p class="text-sm text-chocolate-800/80 leading-relaxed">Precision 3D cookie stampers to emboss company logos, wedding dates, or event messages onto every biscuit.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="p-6 rounded-2xl bg-cream border border-biscuit-200/60 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-biscuit-100 text-biscuit-600 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-chocolate-900 text-lg mb-2">Baked-to-Order Freshness</h3>
-                    <p class="text-sm text-chocolate-800/80 leading-relaxed">We never pre-bake or freeze batches. Your order is baked fresh 24 hours prior to dispatch.</p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="p-6 rounded-2xl bg-cream border border-biscuit-200/60 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-biscuit-100 text-biscuit-600 flex items-center justify-center mb-5">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-chocolate-900 text-lg mb-2">Eco Express Shipping</h3>
-                    <p class="text-sm text-chocolate-800/80 leading-relaxed">Compostable protective packaging and carbon-neutral express courier options nationwide.</p>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Interactive Flavor Gallery & Showcase Section -->
-    <section id="flavors" class="py-20 bg-cream">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Bar -->
+  <section class="border-y border-bakery-200 bg-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="p-3">
+          <i class="fa-solid fa-truck-fast text-2xl text-bakery-600 mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">Fresh Daily Shipping</h4>
+          <p class="text-xs text-bakery-600 mt-1">Baked every morning &amp; shipped fresh</p>
+        </div>
+        <div class="p-3">
+          <i class="fa-solid fa-leaf text-2xl text-bakery-600 mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">100% Organic Butter</h4>
+          <p class="text-xs text-bakery-600 mt-1">No artificial preservatives or palm oil</p>
+        </div>
+        <div class="p-3">
+          <i class="fa-solid fa-stamp text-2xl text-bakery-600 mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">Custom Logo Printing</h4>
+          <p class="text-xs text-bakery-600 mt-1">For corporate events &amp; weddings</p>
+        </div>
+        <div class="p-3">
+          <i class="fa-solid fa-recycle text-2xl text-bakery-600 mb-2"></i>
+          <h4 class="font-semibold text-sm text-bakery-900">Eco Eco Packaging</h4>
+          <p class="text-xs text-bakery-600 mt-1">100% recyclable tin &amp; compostable bags</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Section -->
+  <section id="products" class="py-16 md:py-24 bg-bakery-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-bakery-600">Fresh From Our Ovens</span>
+          <h2 class="text-3xl md:text-4xl font-serif-title font-bold text-bakery-dark mt-1">Our Signature Biscuit Selection</h2>
+        </div>
+        <p class="text-sm text-bakery-700 max-w-md mt-3 md:mt-0">
+          Hand-batched using grass-fed British butter, organic flour, and refined natural flavorings.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-bakery-200 pb-4" id="category-filters">
+        <!-- JS populated or direct links with DataLayer tracking -->
+        <button onclick="filterCategory('all', this)" class="filter-btn active-tab px-4 py-2 rounded-xl text-sm font-medium bg-bakery-800 text-white transition shadow-sm">
+          All Biscuits
+        </button>
+        <button onclick="filterCategory('shortbread', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Classic Shortbread
+        </button>
+        <button onclick="filterCategory('custom-iced', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Custom Hand-Iced
+        </button>
+        <button onclick="filterCategory('hampers', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Gift Hampers
+        </button>
+        <button onclick="filterCategory('gluten-free', this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-bakery-800 hover:bg-bakery-200 transition">
+          Gluten-Free Range
+        </button>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Dynamic Product Cards Injected by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Custom Quote Section -->
+  <section id="quote-section" class="py-16 md:py-24 bg-white border-t border-bakery-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-bakery-100 to-bakery-50 rounded-3xl p-6 sm:p-10 lg:p-12 border border-bakery-200 shadow-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-5 space-y-6">
+            <span class="inline-block px-3 py-1 bg-bakery-800 text-white text-xs font-bold rounded-full uppercase tracking-wider">Corporate &amp; Wedding Orders</span>
+            <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-bakery-900 leading-tight">
+              Bespoke Custom Iced &amp; Branded Biscuits
+            </h2>
+            <p class="text-bakery-700 text-sm leading-relaxed">
+              Elevate your event, launch product campaigns, or delight wedding guests with custom engraved, color-matched, or edible photo-printed artisan biscuits.
+            </p>
+            <ul class="space-y-3 text-sm text-bakery-800 font-medium">
+              <li class="flex items-center space-x-3">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                <span>Pantone-matched icing colors available</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                <span>Individual eco-wrapper with personalized ribbon</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                <span>Fast 5-day dispatch on volume orders</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Interactive Quote Form -->
+          <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-bakery-200">
+            <h3 class="font-serif-title text-xl font-bold text-bakery-900 mb-4">Instant Quote Calculator &amp; Request</h3>
+            
+            <form id="custom-quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <h2 class="text-xs uppercase tracking-widest text-biscuit-600 font-bold mb-2">Our Menu</h2>
-                    <p class="font-serif text-3xl sm:text-4xl font-bold text-chocolate-900">Explore Signature Flavors</p>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Your Full Name *</label>
+                  <input type="text" id="quote-name" required 
+                         onfocus="trackFormField('quote_form', 'name', 'focus')"
+                         onchange="trackFormField('quote_form', 'name', 'change')"
+                         placeholder="e.g. Eleanor Vance" 
+                         class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Email Address *</label>
+                  <input type="email" id="quote-email" required 
+                         onfocus="trackFormField('quote_form', 'email', 'focus')"
+                         onchange="trackFormField('quote_form', 'email', 'change')"
+                         placeholder="eleanor@company.com" 
+                         class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Event Type</label>
+                  <select id="quote-event" 
+                          onchange="updateQuoteEstimate(); trackFormField('quote_form', 'event_type', 'select');"
+                          class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                    <option value="Corporate Event">Corporate / Brand Activation</option>
+                    <option value="Wedding Favours">Wedding Favours</option>
+                    <option value="Birthday / Party">Birthday / Celebration</option>
+                    <option value="PR Gift Box">PR Gift Boxes</option>
+                  </select>
                 </div>
 
-                <!-- Filter Tabs -->
-                <div class="flex items-center space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2 custom-scrollbar">
-                    <button onclick="filterFlavors('all')" class="flavor-tab-btn active bg-biscuit-500 text-white font-medium text-sm px-4 py-2 rounded-full transition-all whitespace-nowrap shadow-sm">All Creations</button>
-                    <button onclick="filterFlavors('shortbread')" class="flavor-tab-btn bg-white hover:bg-biscuit-100 text-chocolate-800 font-medium text-sm px-4 py-2 rounded-full border border-biscuit-200 transition-all whitespace-nowrap">Shortbreads</button>
-                    <button onclick="filterFlavors('sandwiched')" class="flavor-tab-btn bg-white hover:bg-biscuit-100 text-chocolate-800 font-medium text-sm px-4 py-2 rounded-full border border-biscuit-200 transition-all whitespace-nowrap">Sandwiched</button>
-                    <button onclick="filterFlavors('dietary')" class="flavor-tab-btn bg-white hover:bg-biscuit-100 text-chocolate-800 font-medium text-sm px-4 py-2 rounded-full border border-biscuit-200 transition-all whitespace-nowrap">Vegan & GF</button>
+                <div>
+                  <label class="block text-xs font-semibold text-bakery-800 mb-1">Quantity (Units)</label>
+                  <select id="quote-quantity" 
+                          onchange="updateQuoteEstimate(); trackFormField('quote_form', 'quantity', 'select');"
+                          class="w-full px-3.5 py-2.5 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none">
+                    <option value="50">50 Biscuits</option>
+                    <option value="100" selected>100 Biscuits</option>
+                    <option value="250">250 Biscuits</option>
+                    <option value="500">500 Biscuits</option>
+                    <option value="1000">1000+ Biscuits</option>
+                  </select>
                 </div>
-            </div>
+              </div>
 
-            <!-- Product Grid -->
-            <div id="flavor-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Item 1 -->
-                <div class="flavor-card shortbread bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-biscuit-200/70 transition-all duration-300 group">
-                    <div class="relative h-64 overflow-hidden bg-cream-dark">
-                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=800&q=80" alt="Classic Vanilla Shortbread" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/E8D2B8/231511?text=Vanilla+Shortbread'">
-                        <span class="absolute top-4 left-4 bg-biscuit-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Bestseller</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif font-bold text-xl text-chocolate-900">Classic Madagascar Shortbread</h3>
-                            <span class="text-biscuit-600 font-bold text-sm">From £1.20/pc</span>
-                        </div>
-                        <p class="text-sm text-chocolate-800/80 mb-4 line-clamp-2">Melt-in-your-mouth Scottish style shortbread infused with organic Madagascar Bourbon vanilla bean pod seeds.</p>
-                        <div class="flex items-center justify-between pt-2 border-t border-biscuit-100">
-                            <span class="text-xs bg-biscuit-100 text-chocolate-800 font-semibold px-2.5 py-1 rounded-md">Ideal for Branding</span>
-                            <button onclick="openFlavorModal('Classic Madagascar Shortbread', 'Melt-in-your-mouth Scottish style shortbread infused with organic Madagascar Bourbon vanilla bean pod seeds. Perfect canvas for custom logo embossing or personalized messages.', 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=800&q=80')" class="text-xs font-bold text-biscuit-600 hover:text-chocolate-900 flex items-center">
-                                View Details &rarr;
-                            </button>
-                        </div>
-                    </div>
-                </div>
+              <div>
+                <label class="block text-xs font-semibold text-bakery-800 mb-1">Design &amp; Customization Notes</label>
+                <textarea id="quote-notes" rows="2" 
+                          onfocus="trackFormField('quote_form', 'notes', 'focus')"
+                          placeholder="Describe logo, text, or icing color ideas..." 
+                          class="w-full px-3.5 py-2 rounded-lg border border-bakery-300 text-sm focus:ring-2 focus:ring-bakery-600 focus:outline-none"></textarea>
+              </div>
 
-                <!-- Item 2 -->
-                <div class="flavor-card sandwiched bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-biscuit-200/70 transition-all duration-300 group">
-                    <div class="relative h-64 overflow-hidden bg-cream-dark">
-                        <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80" alt="Salted Caramel Sandwich" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/E8D2B8/231511?text=Salted+Caramel'">
-                        <span class="absolute top-4 left-4 bg-amber-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow">Popular</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif font-bold text-xl text-chocolate-900">Dark Choc & Salted Caramel</h3>
-                            <span class="text-biscuit-600 font-bold text-sm">From £1.65/pc</span>
-                        </div>
-                        <p class="text-sm text-chocolate-800/80 mb-4 line-clamp-2">Rich 70% Belgian dark chocolate biscuits sandwiched with handcrafted sea salted caramel buttercream.</p>
-                        <div class="flex items-center justify-between pt-2 border-t border-biscuit-100">
-                            <span class="text-xs bg-biscuit-100 text-chocolate-800 font-semibold px-2.5 py-1 rounded-md">Luxury Treat</span>
-                            <button onclick="openFlavorModal('Dark Choc & Salted Caramel', 'Rich 70% Belgian dark chocolate biscuits sandwiched with handcrafted sea salted caramel buttercream. A decadent choice for VIP corporate gifting.', 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80')" class="text-xs font-bold text-biscuit-600 hover:text-chocolate-900 flex items-center">
-                                View Details &rarr;
-                            </button>
-                        </div>
-                    </div>
+              <!-- Estimated Price Banner -->
+              <div class="p-3.5 rounded-xl bg-bakery-100 border border-bakery-200 flex justify-between items-center">
+                <div>
+                  <span class="text-xs text-bakery-700 font-medium">Estimated Investment:</span>
+                  <div id="quote-estimate-price" class="text-lg font-bold text-bakery-900">£220.00 <span class="text-xs font-normal text-bakery-600">(£2.20 / unit)</span></div>
                 </div>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full">Volume Discount Applied</span>
+              </div>
 
-                <!-- Item 3 -->
-                <div class="flavor-card dietary shortbread bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-biscuit-200/70 transition-all duration-300 group">
-                    <div class="relative h-64 overflow-hidden bg-cream-dark">
-                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80" alt="Lemon & Lavender Vegan" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/E8D2B8/231511?text=Lemon+Lavender'">
-                        <span class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Vegan & GF</span>
-                    </div>
-                    <p class="hidden">dietary</p>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif font-bold text-xl text-chocolate-900">Lemon Zest & French Lavender</h3>
-                            <span class="text-biscuit-600 font-bold text-sm">From £1.45/pc</span>
-                        </div>
-                        <p class="text-sm text-chocolate-800/80 mb-4 line-clamp-2">Fragrant culinary lavender combined with fresh organic lemon zest in a gluten-free plant-based cookie base.</p>
-                        <div class="flex items-center justify-between pt-2 border-t border-biscuit-100">
-                            <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-md">Gluten-Free</span>
-                            <button onclick="openFlavorModal('Lemon Zest & French Lavender', 'Fragrant culinary lavender combined with fresh organic lemon zest in a gluten-free plant-based cookie base. Refreshing and universally friendly for all guests.', 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80')" class="text-xs font-bold text-biscuit-600 hover:text-chocolate-900 flex items-center">
-                                View Details &rarr;
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              <button type="submit" 
+                      class="w-full py-3 bg-bakery-800 text-white font-medium text-sm rounded-xl hover:bg-bakery-700 transition shadow-md flex justify-center items-center space-x-2">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span>Submit Custom Order Inquiry</span>
+              </button>
+            </form>
+          </div>
+
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Interactive Quote Request & Estimator Section -->
-    <section id="quote-calculator" class="py-20 bg-cream-dark border-t border-biscuit-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-start">
-                
-                <!-- Left Details Box -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-xs uppercase tracking-widest text-biscuit-600 font-bold">Instant Estimate & Booking</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-chocolate-900">Request Your Custom Biscuit Quote</h2>
-                    <p class="text-chocolate-800/80 text-sm sm:text-base leading-relaxed">
-                        Planning an event or corporate brand launch? Select your parameters to calculate an instant estimated budget range, then submit your request to our baking team.
-                    </p>
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-16 bg-bakery-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-bakery-600">Loved By Customers &amp; Event Planners</span>
+        <h2 class="text-3xl font-serif-title font-bold text-bakery-dark mt-1">What Bakers &amp; Clients Say</h2>
+      </div>
 
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-start space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-biscuit-200 text-biscuit-600 flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
-                            <div>
-                                <h4 class="font-bold text-chocolate-900 text-sm">Select Style & Volume</h4>
-                                <p class="text-xs text-chocolate-800/70">From mini sample boxes to 10,000+ unit corporate orders.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-biscuit-200 text-biscuit-600 flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
-                            <div>
-                                <h4 class="font-bold text-chocolate-900 text-sm">Add Custom Branding</h4>
-                                <p class="text-xs text-chocolate-800/70">Upload your logo or request custom embossed messaging.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-biscuit-200 text-biscuit-600 flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
-                            <div>
-                                <h4 class="font-bold text-chocolate-900 text-sm">Receive Baking Slot Confirmation</h4>
-                                <p class="text-xs text-chocolate-800/70">Our team will reply with a digital proof within 4 business hours.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Direct Box -->
-                    <div class="p-6 bg-white rounded-2xl border border-biscuit-200 mt-6">
-                        <h4 class="font-bold text-chocolate-900 text-sm mb-1">Prefer to talk directly?</h4>
-                        <p class="text-xs text-chocolate-800/70 mb-3">Call our orders desk or send an email directly to our master baker.</p>
-                        <p class="text-sm font-bold text-biscuit-600">hello@artisanbiscuitco.com</p>
-                        <p class="text-sm font-bold text-chocolate-900">+44 (0) 20 7946 0912</p>
-                    </div>
-                </div>
-
-                <!-- Right Form Box -->
-                <div class="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl shadow-xl border border-biscuit-200">
-                    <form id="quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
-                        
-                        <!-- Biscuit Type Selection -->
-                        <div>
-                            <label class="block text-sm font-bold text-chocolate-900 mb-2">1. Select Biscuit Style</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="biscuit_type" value="1.20" checked class="peer sr-only" onchange="calculateEstimate()">
-                                    <div class="p-3 text-center border-2 border-biscuit-200 rounded-xl peer-checked:border-biscuit-500 peer-checked:bg-biscuit-100/50 hover:bg-cream transition-all">
-                                        <p class="font-bold text-xs sm:text-sm text-chocolate-900">Classic Shortbread</p>
-                                        <p class="text-xs text-chocolate-800/70">Base £1.20/pc</p>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="biscuit_type" value="1.65" class="peer sr-only" onchange="calculateEstimate()">
-                                    <div class="p-3 text-center border-2 border-biscuit-200 rounded-xl peer-checked:border-biscuit-500 peer-checked:bg-biscuit-100/50 hover:bg-cream transition-all">
-                                        <p class="font-bold text-xs sm:text-sm text-chocolate-900">Filled Sandwich</p>
-                                        <p class="text-xs text-chocolate-800/70">Base £1.65/pc</p>
-                                    </div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="biscuit_type" value="1.45" class="peer sr-only" onchange="calculateEstimate()">
-                                    <div class="p-3 text-center border-2 border-biscuit-200 rounded-xl peer-checked:border-biscuit-500 peer-checked:bg-biscuit-100/50 hover:bg-cream transition-all">
-                                        <p class="font-bold text-xs sm:text-sm text-chocolate-900">Vegan / GF Base</p>
-                                        <p class="text-xs text-chocolate-800/70">Base £1.45/pc</p>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Quantity Slider -->
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <label for="quantity-range" class="block text-sm font-bold text-chocolate-900">2. Estimated Quantity</label>
-                                <span id="quantity-display" class="font-bold text-biscuit-600 bg-biscuit-100 px-3 py-1 rounded-full text-sm">250 Biscuits</span>
-                            </div>
-                            <input type="range" id="quantity-range" min="50" max="2500" step="50" value="250" class="w-full h-2 bg-biscuit-200 rounded-lg appearance-none cursor-pointer accent-biscuit-500" oninput="calculateEstimate()">
-                            <div class="flex justify-between text-xs text-chocolate-800/60 mt-1">
-                                <span>50 units</span>
-                                <span>500 units</span>
-                                <span>2,500+ units</span>
-                            </div>
-                        </div>
-
-                        <!-- Customization Checkboxes -->
-                        <div>
-                            <label class="block text-sm font-bold text-chocolate-900 mb-2">3. Personalization & Packaging Options</label>
-                            <div class="space-y-2">
-                                <label class="flex items-center space-x-3 p-3 border border-biscuit-200 rounded-xl hover:bg-cream cursor-pointer">
-                                    <input type="checkbox" id="custom-stamp" value="0.30" class="w-4 h-4 text-biscuit-500 rounded border-biscuit-300 focus:ring-biscuit-500" onchange="calculateEstimate()">
-                                    <span class="text-xs sm:text-sm text-chocolate-900 font-medium">Custom Logo / Monogram Embossing Stamp (+£0.30/pc)</span>
-                                </label>
-                                <label class="flex items-center space-x-3 p-3 border border-biscuit-200 rounded-xl hover:bg-cream cursor-pointer">
-                                    <input type="checkbox" id="gift-box" value="0.50" class="w-4 h-4 text-biscuit-500 rounded border-biscuit-300 focus:ring-biscuit-500" onchange="calculateEstimate()">
-                                    <span class="text-xs sm:text-sm text-chocolate-900 font-medium">Individual Biodegradable Gift Box Ribbon Wrapping (+£0.50/pc)</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Estimated Price Summary Box -->
-                        <div class="p-4 bg-biscuit-100/70 rounded-2xl border border-biscuit-300/50 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs font-semibold text-chocolate-800/80 uppercase">Estimated Budget</span>
-                                <p id="price-estimate" class="text-2xl sm:text-3xl font-serif font-extrabold text-chocolate-900">£375.00</p>
-                            </div>
-                            <span class="text-xs text-chocolate-800/70 max-w-[140px] text-right">Excl. shipping. Quantity discounts applied automatically.</span>
-                        </div>
-
-                        <!-- Contact Inputs -->
-                        <div class="grid sm:grid-cols-2 gap-4 pt-2">
-                            <div>
-                                <label for="contact-name" class="block text-xs font-bold text-chocolate-900 uppercase mb-1">Your Name *</label>
-                                <input type="text" id="contact-name" required placeholder="Jane Doe" class="w-full px-4 py-3 rounded-xl border border-biscuit-300 focus:ring-2 focus:ring-biscuit-500 focus:outline-none text-sm">
-                            </div>
-                            <div>
-                                <label for="contact-email" class="block text-xs font-bold text-chocolate-900 uppercase mb-1">Email Address *</label>
-                                <input type="email" id="contact-email" required placeholder="jane@company.com" class="w-full px-4 py-3 rounded-xl border border-biscuit-300 focus:ring-2 focus:ring-biscuit-500 focus:outline-none text-sm">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="event-date" class="block text-xs font-bold text-chocolate-900 uppercase mb-1">Required Event Date</label>
-                            <input type="date" id="event-date" class="w-full px-4 py-3 rounded-xl border border-biscuit-300 focus:ring-2 focus:ring-biscuit-500 focus:outline-none text-sm text-chocolate-800">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="w-full bg-biscuit-500 hover:bg-biscuit-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
-                            Submit Request for Final Quotation
-                        </button>
-                    </form>
-                </div>
-
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div onclick="pushToDataLayer('testimonial_engagement', { author: 'Sarah Jenkins', type: 'review_click', rating: 5 })"
+             class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
+          <div class="flex text-amber-500 text-xs mb-3">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-sm text-bakery-800 italic mb-4">"The custom iced biscuits for our brand re-launch were absolute showstoppers! Everyone commented on how delicious and butter-rich they were."</p>
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">SJ</div>
+            <div>
+              <h5 class="text-xs font-bold text-bakery-900">Sarah Jenkins</h5>
+              <p class="text-[11px] text-bakery-600">Marketing Lead, Vogue Events</p>
             </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Testimonials Carousel Section -->
-    <section id="testimonials" class="py-20 bg-white border-y border-biscuit-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs uppercase tracking-widest text-biscuit-600 font-bold mb-2">Testimonials</h2>
-                <p class="font-serif text-3xl sm:text-4xl font-bold text-chocolate-900">Loved By Event Planners & Brands</p>
+        <!-- Testimonial 2 -->
+        <div onclick="pushToDataLayer('testimonial_engagement', { author: 'David & Clare', type: 'review_click', rating: 5 })"
+             class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
+          <div class="flex text-amber-500 text-xs mb-3">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-sm text-bakery-800 italic mb-4">"We ordered 150 personalized shortbreads as wedding favours. They were packaged beautifully and tasted divine. 10/10 service!"</p>
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">DC</div>
+            <div>
+              <h5 class="text-xs font-bold text-bakery-900">David &amp; Clare W.</h5>
+              <p class="text-[11px] text-bakery-600">Married in Cotswolds</p>
             </div>
-
-            <!-- Testimonial Slider Container -->
-            <div class="relative max-w-4xl mx-auto">
-                <div id="testimonial-container" class="glass-card p-8 sm:p-12 rounded-3xl shadow-lg border border-biscuit-200 relative min-h-[260px] flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-amber-gold mb-4">
-                            ★★★★★
-                        </div>
-                        <p id="testimonial-quote" class="font-serif text-lg sm:text-xl italic text-chocolate-900 leading-relaxed">
-                            "The custom embossed biscuits for our tech summit launch were an absolute showstopper! Not only did our logo look razor-sharp, but the shortbread melted in your mouth. We ordered 1,500 units and didn't have a single crumb left."
-                        </p>
-                    </div>
-
-                    <div class="flex items-center justify-between mt-8 pt-6 border-t border-biscuit-200/60">
-                        <div class="flex items-center space-x-4">
-                            <div id="testimonial-avatar" class="w-12 h-12 rounded-full bg-biscuit-300 text-chocolate-900 font-bold flex items-center justify-center font-serif text-lg">
-                                SG
-                            </div>
-                            <div>
-                                <h4 id="testimonial-author" class="font-bold text-chocolate-900 text-base">Sarah Jenkins</h4>
-                                <p id="testimonial-role" class="text-xs text-chocolate-800/70">Head of Events, Horizon Tech</p>
-                            </div>
-                        </div>
-
-                        <!-- Arrows -->
-                        <div class="flex space-x-2">
-                            <button onclick="prevTestimonial()" aria-label="Previous Testimonial" class="p-2 rounded-full border border-biscuit-300 hover:bg-biscuit-100 text-chocolate-900 transition-colors">
-                                &larr;
-                            </button>
-                            <button onclick="nextTestimonial()" aria-label="Next Testimonial" class="p-2 rounded-full border border-biscuit-300 hover:bg-biscuit-100 text-chocolate-900 transition-colors">
-                                &rarr;
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-chocolate-900 text-cream pt-16 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-chocolate-800">
-                
-                <!-- Brand Info -->
-                <div class="md:col-span-5 space-y-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-full bg-biscuit-500 flex items-center justify-center text-white">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <circle cx="8.5" cy="8.5" r="1.2"/>
-                                <circle cx="15.5" cy="8.5" r="1.2"/>
-                                <circle cx="12" cy="12" r="1.2"/>
-                            </svg>
-                        </div>
-                        <span class="font-serif font-bold text-2xl text-white">The Artisan Biscuit Co.</span>
-                    </div>
-                    <p class="text-sm text-cream-dark/70 max-w-sm leading-relaxed">
-                        Handcrafting luxury bespoke biscuits, corporate embossed gifts, and wholesale artisanal confectionery fresh daily.
-                    </p>
-                    <div class="flex space-x-4 pt-2">
-                        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full bg-chocolate-800 hover:bg-biscuit-500 text-white flex items-center justify-center transition-colors">IG</a>
-                        <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-chocolate-800 hover:bg-biscuit-500 text-white flex items-center justify-center transition-colors">LN</a>
-                        <a href="#" aria-label="Pinterest" class="w-9 h-9 rounded-full bg-chocolate-800 hover:bg-biscuit-500 text-white flex items-center justify-center transition-colors">PIN</a>
-                    </div>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="md:col-span-3 space-y-3">
-                    <h4 class="font-bold text-white text-sm uppercase tracking-wider">Quick Navigation</h4>
-                    <ul class="space-y-2 text-sm text-cream-dark/80">
-                        <li><a href="#about" class="hover:text-biscuit-300 transition-colors">Our Bakery Story</a></li>
-                        <li><a href="#flavors" class="hover:text-biscuit-300 transition-colors">Seasonal Flavors</a></li>
-                        <li><a href="#quote-calculator" class="hover:text-biscuit-300 transition-colors">Instant Quote Estimator</a></li>
-                        <li><a href="#testimonials" class="hover:text-biscuit-300 transition-colors">Client Reviews</a></li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter Signup -->
-                <div class="md:col-span-4 space-y-4">
-                    <h4 class="font-bold text-white text-sm uppercase tracking-wider">Join The Biscuit Club</h4>
-                    <p class="text-xs text-cream-dark/70">Subscribe to receive seasonal flavor announcements and exclusive wholesale offers.</p>
-                    <form onsubmit="handleNewsletter(event)" class="flex space-x-2">
-                        <input type="email" required placeholder="Enter email address" class="bg-chocolate-800 text-white text-sm px-4 py-2.5 rounded-xl border border-chocolate-800 focus:outline-none focus:border-biscuit-400 w-full">
-                        <button type="submit" class="bg-biscuit-500 hover:bg-biscuit-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors">Join</button>
-                    </form>
-                </div>
-
+        <!-- Testimonial 3 -->
+        <div onclick="pushToDataLayer('testimonial_engagement', { author: 'Michael Ross', type: 'review_click', rating: 5 })"
+             class="bg-white p-6 rounded-2xl shadow-sm border border-bakery-200 hover:border-bakery-400 transition cursor-pointer">
+          <div class="flex text-amber-500 text-xs mb-3">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-sm text-bakery-800 italic mb-4">"The gluten-free shortbread collection is by far the best I've tasted in years. Crumbly, rich, and not overly sweet. Will buy monthly."</p>
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-bakery-200 flex items-center justify-center font-bold text-bakery-800 text-xs">MR</div>
+            <div>
+              <h5 class="text-xs font-bold text-bakery-900">Michael Ross</h5>
+              <p class="text-[11px] text-bakery-600">Verified Customer</p>
             </div>
-
-            <!-- Copyright -->
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream-dark/50">
-                <p>&copy; <span id="year"></span> The Artisan Biscuit Co. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 sm:mt-0">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                    <a href="#" class="hover:underline">Terms of Supply</a>
-                    <a href="#" class="hover:underline">Food Hygiene Standards</a>
-                </div>
-            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- Flavor Detail Modal -->
-    <div id="flavor-modal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all">
-            <div class="relative h-56 bg-cream-dark">
-                <img id="modal-img" src="" alt="Detail View" class="w-full h-full object-cover">
-                <button onclick="closeFlavorModal()" class="absolute top-4 right-4 bg-white/80 hover:bg-white text-chocolate-900 rounded-full w-8 h-8 flex items-center justify-center font-bold">✕</button>
-            </div>
-            <div class="p-6">
-                <h3 id="modal-title" class="font-serif font-bold text-2xl text-chocolate-900 mb-2"></h3>
-                <p id="modal-desc" class="text-chocolate-800/80 text-sm leading-relaxed mb-6"></p>
-                <div class="flex justify-end space-x-3">
-                    <button onclick="closeFlavorModal()" class="px-5 py-2.5 bg-biscuit-100 text-chocolate-900 rounded-full text-sm font-bold">Close</button>
-                    <a href="#quote-calculator" onclick="closeFlavorModal()" class="px-5 py-2.5 bg-biscuit-500 text-white rounded-full text-sm font-bold shadow">Request Quote For This</a>
-                </div>
-            </div>
+  <!-- Footer -->
+  <footer id="about" class="bg-bakery-dark text-bakery-100 pt-16 pb-12 border-t border-bakery-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-bakery-800">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-bakery-600 text-white flex items-center justify-center font-serif-title font-bold text-lg">A</div>
+            <span class="font-serif-title text-xl font-bold text-white">Artisan Biscuit Co.</span>
+          </div>
+          <p class="text-xs text-bakery-300 leading-relaxed">
+            Crafting luxury traditional shortbreads and custom decorated biscuits from our bakery in the heart of the British countryside.
+          </p>
         </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-serif-title text-sm font-semibold text-white mb-3">Quick Navigation</h4>
+          <ul class="space-y-2 text-xs text-bakery-300">
+            <li><a href="#products" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_shop', cta_text: 'Shop Collection' })" class="hover:text-gold transition">Shop All Biscuits</a></li>
+            <li><a href="#quote-section" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_quote', cta_text: 'Custom Orders' })" class="hover:text-gold transition">Bespoke &amp; Corporate Orders</a></li>
+            <li><a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_ingredients', cta_text: 'Ingredients' })" class="hover:text-gold transition">Ingredients &amp; Allergen Guide</a></li>
+            <li><a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_shipping', cta_text: 'Shipping Info' })" class="hover:text-gold transition">Delivery &amp; Packaging Info</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Hours -->
+        <div>
+          <h4 class="font-serif-title text-sm font-semibold text-white mb-3">Bakery Kitchen</h4>
+          <p class="text-xs text-bakery-300 leading-relaxed">
+            12 Mill Lane, Chipping Campden<br>
+            Cotswolds, GL55 6HB, UK<br><br>
+            Mon - Fri: 8am - 5pm GMT<br>
+            Email: hello@artisanbiscuitco.co.uk
+          </p>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div>
+          <h4 class="font-serif-title text-sm font-semibold text-white mb-3">Join The Biscuit Club</h4>
+          <p class="text-xs text-bakery-300 mb-3">Get 10% off your first order plus secret seasonal drop alerts.</p>
+          
+          <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
+            <input type="email" id="newsletter-email" required
+                   onfocus="trackFormField('newsletter_form', 'email', 'focus')"
+                   placeholder="Enter your email" 
+                   class="w-full px-3 py-2 rounded-lg bg-bakery-900 border border-bakery-700 text-xs text-white placeholder-bakery-400 focus:outline-none focus:border-gold">
+            <button type="submit" 
+                    class="w-full py-2 bg-gold hover:bg-amber-600 text-bakery-dark font-bold text-xs rounded-lg transition shadow-sm">
+              Subscribe &amp; Get 10% Off
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-bakery-400 space-y-4 sm:space-y-0">
+        <p>© 2026 Artisan Biscuit Co. All rights reserved. GA4 DataLayer tracking integrated.</p>
+        <div class="flex space-x-4">
+          <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_privacy', cta_text: 'Privacy Policy' })" class="hover:underline">Privacy Policy</a>
+          <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_terms', cta_text: 'Terms of Service' })" class="hover:underline">Terms of Service</a>
+          <a href="#" onclick="pushToDataLayer('cta_click', { cta_id: 'footer_cookies', cta_text: 'Cookie Settings' })" class="hover:underline">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden transition-opacity opacity-0" onclick="closeCartDrawer()"></div>
+  
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-4 sm:p-6 border-b border-bakery-200 flex justify-between items-center bg-bakery-50">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-basket-shopping text-bakery-800 text-lg"></i>
+        <h3 class="font-serif-title font-bold text-lg text-bakery-900">Your Fresh Order</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="text-bakery-500 hover:text-bakery-900 p-2 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
 
-    <!-- Submission Confirmation Modal -->
-    <div id="confirm-modal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                ✓
-            </div>
-            <h3 class="font-serif font-bold text-2xl text-chocolate-900 mb-2">Quote Request Received!</h3>
-            <p class="text-sm text-chocolate-800/80 mb-6">Thank you for contacting us. Our master baker is reviewing your specifications and will send a detailed PDF estimate and digital proof to your inbox shortly.</p>
-            <button onclick="closeConfirmModal()" class="w-full bg-biscuit-500 text-white font-bold py-3 rounded-xl shadow">Got it, thanks!</button>
-        </div>
+    <!-- Cart Items List Container -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+      <!-- Injected dynamically via JS -->
     </div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- Drawer Footer Summary & Checkout CTA -->
+    <div class="p-4 sm:p-6 border-t border-bakery-200 bg-bakery-50 space-y-3">
+      <div class="space-y-1.5 text-xs text-bakery-800">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-text" class="font-semibold">£0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Estimated UK Delivery</span>
+          <span id="cart-shipping-text" class="font-semibold">£3.95</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-bakery-900 pt-2 border-t border-bakery-200">
+          <span>Total (Incl. VAT)</span>
+          <span id="cart-total-text" class="text-bakery-800 text-base">£0.00</span>
+        </div>
+      </div>
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+      <button id="checkout-cta-btn" 
+              onclick="startCheckout()" 
+              class="w-full py-3.5 bg-bakery-800 text-white font-medium text-sm rounded-xl hover:bg-bakery-700 transition shadow-md flex justify-center items-center space-x-2 disabled:opacity-50">
+        <span>Proceed to Checkout</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick View Product Modal -->
+  <div id="quickview-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border border-bakery-200 relative animate-fade-in">
+      <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-bakery-900 flex items-center justify-center shadow">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="quickview-content" class="grid grid-cols-1 sm:grid-cols-2">
+        <!-- JS dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Multi-Step Checkout Modal -->
+  <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl border border-bakery-200 overflow-hidden my-8">
+      
+      <!-- Checkout Header -->
+      <div class="bg-bakery-900 text-white p-4 sm:p-6 flex justify-between items-center">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-gold font-bold">Secure Express Checkout</span>
+          <h3 class="font-serif-title text-xl font-bold">Artisan Biscuit Bakery Store</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-bakery-300 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Checkout Form Body -->
+      <form id="checkout-form" onsubmit="handlePurchaseSubmit(event)" class="p-6 space-y-6">
+        
+        <!-- Step 1: Shipping Details -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
+            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-xs flex items-center justify-center">1</span>
+            <span>Shipping &amp; Delivery Address</span>
+          </h4>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input type="text" id="chk-first-name" required placeholder="First Name *" 
+                   onchange="trackCheckoutStep('add_shipping_info', 'first_name')"
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+            <input type="text" id="chk-last-name" required placeholder="Last Name *" 
+                   onchange="trackCheckoutStep('add_shipping_info', 'last_name')"
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+          </div>
+
+          <input type="email" id="chk-email" required placeholder="Email Address (for order tracking receipt) *" 
+                 onchange="trackCheckoutStep('add_shipping_info', 'email')"
+                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+
+          <input type="text" id="chk-address" required placeholder="Street Address *" 
+                 onchange="trackCheckoutStep('add_shipping_info', 'address')"
+                 class="w-full px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+
+          <div class="grid grid-cols-2 gap-3">
+            <input type="text" id="chk-city" required placeholder="Town / City *" 
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+            <input type="text" id="chk-postcode" required placeholder="Postcode *" 
+                   class="px-3.5 py-2 text-xs border border-bakery-300 rounded-lg focus:ring-1 focus:ring-bakery-600">
+          </div>
+        </div>
+
+        <!-- Step 2: Payment Options -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-bakery-900 flex items-center space-x-2 border-b border-bakery-200 pb-2">
+            <span class="w-5 h-5 rounded-full bg-bakery-800 text-white text-xs flex items-center justify-center">2</span>
+            <span>Payment Method</span>
+          </h4>
+
+          <div class="grid grid-cols-2 gap-3" id="payment-options">
+            <label class="border border-bakery-300 p-3 rounded-xl flex items-center space-x-2 cursor-pointer hover:bg-bakery-50">
+              <input type="radio" name="payment_method" value="Credit Card" checked 
+                     onchange="trackCheckoutStep('add_payment_info', 'Credit Card')">
+              <span class="text-xs font-semibold text-bakery-800"><i class="fa-solid fa-credit-card mr-1 text-bakery-600"></i> Credit / Debit</span>
+            </label>
+            <label class="border border-bakery-300 p-3 rounded-xl flex items-center space-x-2 cursor-pointer hover:bg-bakery-50">
+              <input type="radio" name="payment_method" value="Apple Pay / GPay" 
+                     onchange="trackCheckoutStep('add_payment_info', 'Apple Pay')">
+              <span class="text-xs font-semibold text-bakery-800"><i class="fa-brands fa-apple mr-1"></i> Express Pay</span>
+            </label>
+          </div>
+
+          <div class="space-y-2 bg-bakery-50 p-3 rounded-xl border border-bakery-200 text-xs">
+            <input type="text" placeholder="Card Number (Mock - Demo Only)" value="4242 •••• •••• 4242" readonly 
+                   class="w-full bg-white px-3 py-2 border border-bakery-300 rounded text-bakery-600">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" placeholder="MM/YY" value="12/28" readonly class="bg-white px-3 py-1.5 border border-bakery-300 rounded text-bakery-600">
+              <input type="text" placeholder="CVC" value="123" readonly class="bg-white px-3 py-1.5 border border-bakery-300 rounded text-bakery-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Summary Total & Place Order -->
+        <div class="border-t border-bakery-200 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-xs text-bakery-600">Total Payable:</span>
+            <div id="checkout-modal-total" class="text-2xl font-bold text-bakery-900">£0.00</div>
+          </div>
+
+          <button type="submit" 
+                  class="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 text-white font-bold text-sm rounded-xl hover:bg-emerald-800 transition shadow-lg flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-lock text-xs"></i>
+            <span>Complete Order (£)</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Complete Modal Confirmation -->
+  <div id="order-complete-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl p-8 shadow-2xl text-center space-y-4 border border-bakery-200">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-inner">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-serif-title text-2xl font-bold text-bakery-900">Thank You For Your Order!</h3>
+      <p class="text-xs text-bakery-700 leading-relaxed">
+        Your artisan treats have been received by our kitchen. A GA4 <code class="bg-bakery-100 text-emerald-800 font-bold px-1 py-0.5 rounded">purchase</code> DataLayer event was successfully triggered!
+      </p>
+
+      <div class="bg-bakery-50 p-4 rounded-xl border border-bakery-200 text-left text-xs space-y-1">
+        <div class="flex justify-between text-bakery-600">
+          <span>Order Reference:</span>
+          <span id="order-ref-id" class="font-mono font-bold text-bakery-900">#ABC-0000</span>
+        </div>
+        <div class="flex justify-between text-bakery-600">
+          <span>Items Ordered:</span>
+          <span id="order-ref-count" class="font-bold text-bakery-900">0 items</span>
+        </div>
+        <div class="flex justify-between text-bakery-600">
+          <span>Total Paid:</span>
+          <span id="order-ref-total" class="font-bold text-emerald-700">£0.00</span>
+        </div>
+      </div>
+
+      <button onclick="closeOrderCompleteModal()" 
+              class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-bakery-700 transition">
+        Continue Browsing Bakery
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating DataLayer Live Event Inspector Window -->
+  <div id="debug-panel" class="fixed bottom-4 left-4 z-50 w-96 max-w-[calc(100vw-2rem)] bg-zinc-900 text-zinc-100 rounded-2xl shadow-2xl border border-zinc-700 flex flex-col hidden overflow-hidden transition-all duration-300">
+    <div class="bg-zinc-800 px-4 py-3 flex items-center justify-between border-b border-zinc-700">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <h4 class="font-mono text-xs font-bold text-zinc-200">GA4 DataLayer Event Log</h4>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="clearDebugLogs()" title="Clear logs" class="text-zinc-400 hover:text-white text-xs px-2 py-0.5 rounded bg-zinc-700">
+          Clear
+        </button>
+        <button onclick="toggleDebugPanel()" class="text-zinc-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Inspector Log Output Stream -->
+    <div id="debug-log-list" class="p-3 h-64 overflow-y-auto debug-scroll font-mono text-[11px] space-y-2 bg-zinc-950">
+      <!-- Dynamic JSON log items appear here -->
+    </div>
+
+    <div class="bg-zinc-900 px-3 py-2 text-[10px] text-zinc-400 border-t border-zinc-800 flex justify-between items-center">
+      <span>Real-time window.dataLayer Stream</span>
+      <span class="text-emerald-400 font-semibold">Active</span>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 z-50 bg-bakery-900 text-white px-4 py-3 rounded-xl shadow-lg text-xs font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-2 border border-gold">
+    <i class="fa-solid fa-circle-check text-gold"></i>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <script>
+    // Product Database Catalog
+    const PRODUCTS = [
+      {
+        id: 'SKU-001',
+        name: 'Classic Cotswold Shortbread',
+        category: 'shortbread',
+        category_label: 'Classic Shortbread',
+        price: 8.50,
+        rating: 4.9,
+        reviews_count: 84,
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+        description: 'Melt-in-your-mouth luxury British shortbread rounds baked with pure organic butter and finished with fine caster sugar.',
+        badge: 'Bestseller'
+      },
+      {
+        id: 'SKU-002',
+        name: 'Lavender & Honey Crisp',
+        category: 'shortbread',
+        category_label: 'Classic Shortbread',
+        price: 9.50,
+        rating: 4.8,
+        reviews_count: 52,
+        image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80',
+        description: 'Infused with Cotswold wildflower honey and subtle English lavender buds for a fragrant teatime experience.',
+        badge: 'Seasonal'
+      },
+      {
+        id: 'SKU-003',
+        name: 'Custom Royal Iced Biscuits (Box of 12)',
+        category: 'custom-iced',
+        category_label: 'Custom Hand-Iced',
+        price: 24.00,
+        rating: 5.0,
+        reviews_count: 118,
+        image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80',
+        description: 'Intricately hand-decorated vanilla sugar cookies customized for birthdays, anniversaries, or special celebrations.',
+        badge: 'Customizable'
+      },
+      {
+        id: 'SKU-004',
+        name: 'Dark Chocolate & Sea Salt Shortbread',
+        category: 'shortbread',
+        category_label: 'Classic Shortbread',
+        price: 10.00,
+        rating: 4.9,
+        reviews_count: 67,
+        image: 'https://images.unsplash.com/photo-1548848221-0c2e497ed557?auto=format&fit=crop&w=600&q=80',
+        description: 'Rich 70% Belgian dark chocolate chunks paired with Maldon sea salt flakes in a crisp buttery dough.',
+        badge: 'Popular'
+      },
+      {
+        id: 'SKU-005',
+        name: 'The Royal Bakery Gift Hamper Box',
+        category: 'hampers',
+        category_label: 'Gift Hampers',
+        price: 45.00,
+        rating: 5.0,
+        reviews_count: 93,
+        image: 'https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&w=600&q=80',
+        description: 'Our premier luxury hamper including 4 biscuit varieties, artisan preserves, and organic loose-leaf tea tin.',
+        badge: 'Luxury Gift'
+      },
+      {
+        id: 'SKU-006',
+        name: 'Gluten-Free Butter Shortbreads',
+        category: 'gluten-free',
+        category_label: 'Gluten-Free Range',
+        price: 9.00,
+        rating: 4.7,
+        reviews_count: 41,
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+        description: 'Crafted with rice flour and tapioca flour, keeping the exact same buttery texture without any gluten.',
+        badge: 'Gluten-Free'
+      },
+      {
+        id: 'SKU-007',
+        name: 'Spiced Pistachio & Cardamom Cookies',
+        category: 'shortbread',
+        category_label: 'Classic Shortbread',
+        price: 11.20,
+        rating: 4.8,
+        reviews_count: 36,
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+        description: 'Fragrant crushed pistachios and aromatic green cardamom baked into delicate melt-in-mouth rounds.',
+        badge: 'New'
+      },
+      {
+        id: 'SKU-008',
+        name: 'Corporate Branded Logo Biscuits (Pack of 20)',
+        category: 'custom-iced',
+        category_label: 'Custom Hand-Iced',
+        price: 38.00,
+        rating: 4.9,
+        reviews_count: 75,
+        image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80',
+        description: 'Precision edible icing prints of your corporate logo on our signature butter sugar biscuits.',
+        badge: 'Corporate'
+      }
+    ];
+
+    // State Variables
+    let cart = [];
+    let activeCategory = 'all';
+
+    // UI Toast Notification
+    function showNotification(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Toggle Mobile Navigation Menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Render Products Grid
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      const filtered = activeCategory === 'all' 
+        ? PRODUCTS 
+        : PRODUCTS.filter(p => p.category === activeCategory);
+
+      grid.innerHTML = filtered.map(product => `
+        <div class="bg-white rounded-2xl overflow-hidden border border-bakery-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+          <div class="relative h-48 overflow-hidden bg-bakery-100">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-bakery-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+              ${product.badge}
+            </span>
+            <button onclick="openQuickView('${product.id}')" 
+                    class="absolute bottom-3 right-3 bg-white/90 hover:bg-white text-bakery-900 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm backdrop-blur-sm transition">
+              <i class="fa-solid fa-eye mr-1"></i> Quick View
+            </button>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-xs text-bakery-600 mb-1">
+                <span>${product.category_label}</span>
+                <span class="text-amber-500 font-semibold"><i class="fa-solid fa-star text-[10px]"></i> ${product.rating} (${product.reviews_count})</span>
+              </div>
+              <h3 class="font-serif-title font-bold text-base text-bakery-900 mb-2">${product.name}</h3>
+              <p class="text-xs text-bakery-700 line-clamp-2 mb-4">${product.description}</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-3 border-t border-bakery-100">
+              <span class="text-lg font-bold text-bakery-900">£${product.price.toFixed(2)}</span>
+              <button onclick="addToCart('${product.id}', 1)" 
+                      class="px-3.5 py-2 bg-bakery-800 text-white text-xs font-medium rounded-xl hover:bg-bakery-700 transition shadow-sm flex items-center space-x-1">
+                <i class="fa-solid fa-cart-plus text-xs"></i>
+                <span>Add To Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Category Filter Function
+    function filterCategory(category, buttonEl) {
+      activeCategory = category;
+      
+      // DataLayer Event: select_item / view_item_list
+      pushToDataLayer('select_item', {
+        item_list_name: 'Category Filter',
+        category_selected: category
+      });
+
+      // Update Active Tab Styles
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-bakery-800', 'text-white');
+        btn.classList.add('bg-white', 'text-bakery-800');
+      });
+      buttonEl.classList.remove('bg-white', 'text-bakery-800');
+      buttonEl.classList.add('bg-bakery-800', 'text-white');
+
+      renderProducts();
+    }
+
+    // Add Item To Cart (With GA4 DataLayer add_to_cart tracking)
+    function addToCart(productId, qty = 1) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += qty;
+      } else {
+        cart.push({
+          ...product,
+          quantity: qty
+        });
+      }
+
+      // GA4 DataLayer Event: add_to_cart
+      pushToDataLayer('add_to_cart', {
+        currency: 'GBP',
+        value: product.price * qty,
+        items: [{
+          item_id: product.id,
+          item_name: product.name,
+          item_category: product.category_label,
+          price: product.price,
+          quantity: qty
+        }]
+      });
+
+      updateCartUI();
+      showNotification(`Added "${product.name}" to cart!`);
+    }
+
+    // Remove or Reduce Quantity in Cart (With GA4 remove_from_cart tracking)
+    function updateCartQuantity(productId, newQty) {
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex === -1) return;
+
+      const item = cart[itemIndex];
+
+      if (newQty <= 0) {
+        // GA4 DataLayer Event: remove_from_cart
+        pushToDataLayer('remove_from_cart', {
+          currency: 'GBP',
+          value: item.price * item.quantity,
+          items: [{
+            item_id: item.id,
+            item_name: item.name,
+            item_category: item.category_label,
+            price: item.price,
+            quantity: item.quantity
+          }]
         });
 
-        // Flavor Filter Logic
-        function filterFlavors(category) {
-            const cards = document.querySelectorAll('.flavor-card');
-            const btns = document.querySelectorAll('.flavor-tab-btn');
+        cart.splice(itemIndex, 1);
+      } else {
+        item.quantity = newQty;
+      }
 
-            btns.forEach(btn => {
-                btn.classList.remove('bg-biscuit-500', 'text-white');
-                btn.classList.add('bg-white', 'text-chocolate-800');
-            });
+      updateCartUI();
+    }
 
-            event.currentTarget.classList.remove('bg-white', 'text-chocolate-800');
-            event.currentTarget.classList.add('bg-biscuit-500', 'text-white');
+    // Update Cart UI Drawer elements
+    function updateCartUI() {
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal > 40 || subtotal === 0 ? 0 : 3.95;
+      const total = subtotal + shipping;
 
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+      // Badge Count
+      document.getElementById('cart-badge-count').innerText = totalCount;
 
-        // Flavor Modal Controls
-        function openFlavorModal(title, description, imgUrl) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-desc').textContent = description;
-            document.getElementById('modal-img').src = imgUrl;
-            document.getElementById('flavor-modal').classList.remove('hidden');
-            document.getElementById('flavor-modal').classList.add('flex');
-        }
+      // Cart Items HTML
+      const container = document.getElementById('cart-items-container');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-bakery-500 space-y-3">
+            <i class="fa-solid fa-basket-shopping text-4xl text-bakery-300"></i>
+            <p class="text-sm font-medium">Your biscuit basket is empty</p>
+            <a href="#products" onclick="closeCartDrawer()" class="inline-block text-xs text-bakery-800 underline font-semibold">Start Shopping</a>
+          </div>
+        `;
+        document.getElementById('checkout-cta-btn').disabled = true;
+      } else {
+        document.getElementById('checkout-cta-btn').disabled = false;
+        container.innerHTML = cart.map(item => `
+          <div class="flex items-center space-x-3 bg-bakery-50 p-3 rounded-xl border border-bakery-200">
+            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+            <div class="flex-1">
+              <h4 class="text-xs font-bold text-bakery-900">${item.name}</h4>
+              <span class="text-xs text-bakery-600">£${item.price.toFixed(2)} each</span>
+              <div class="flex items-center space-x-2 mt-1">
+                <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})" class="w-5 h-5 bg-white border border-bakery-300 rounded flex items-center justify-center text-xs font-bold hover:bg-bakery-200">-</button>
+                <span class="text-xs font-bold px-1">${item.quantity}</span>
+                <button onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})" class="w-5 h-5 bg-white border border-bakery-300 rounded flex items-center justify-center text-xs font-bold hover:bg-bakery-200">+</button>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-bold text-bakery-900">£${(item.price * item.quantity).toFixed(2)}</span>
+              <button onclick="updateCartQuantity('${item.id}', 0)" class="block text-[10px] text-red-600 hover:underline mt-2">Remove</button>
+            </div>
+          </div>
+        `).join('');
+      }
 
-        function closeFlavorModal() {
-            document.getElementById('flavor-modal').classList.add('hidden');
-            document.getElementById('flavor-modal').classList.remove('flex');
-        }
+      // Update Summary Text
+      document.getElementById('cart-subtotal-text').innerText = `£${subtotal.toFixed(2)}`;
+      document.getElementById('cart-shipping-text').innerText = shipping === 0 ? 'FREE' : `£${shipping.toFixed(2)}`;
+      document.getElementById('cart-total-text').innerText = `£${total.toFixed(2)}`;
+      document.getElementById('checkout-modal-total').innerText = `£${total.toFixed(2)}`;
+    }
 
-        // Interactive Price Estimator
-        function calculateEstimate() {
-            const selectedType = parseFloat(document.querySelector('input[name="biscuit_type"]:checked').value);
-            const quantity = parseInt(document.getElementById('quantity-range').value);
-            const customStamp = document.getElementById('custom-stamp').checked ? parseFloat(document.getElementById('custom-stamp').value) : 0;
-            const giftBox = document.getElementById('gift-box').checked ? parseFloat(document.getElementById('gift-box').value) : 0;
+    // Open & Close Cart Drawer
+    function openCartDrawer() {
+      const overlay = document.getElementById('cart-drawer-overlay');
+      const drawer = document.getElementById('cart-drawer');
+      overlay.classList.remove('hidden');
+      setTimeout(() => {
+        overlay.classList.remove('opacity-0');
+        drawer.classList.remove('translate-x-full');
+      }, 10);
 
-            document.getElementById('quantity-display').textContent = quantity.toLocaleString() + ' Biscuits';
+      // DataLayer Event: view_cart
+      pushToDataLayer('view_cart', {
+        currency: 'GBP',
+        value: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        items: cart.map(item => ({
+          item_id: item.id,
+          item_name: item.name,
+          quantity: item.quantity,
+          price: item.price
+        }))
+      });
+    }
 
-            let unitPrice = selectedType + customStamp + giftBox;
-            
-            // Apply volume discount
-            if (quantity >= 1000) {
-                unitPrice *= 0.85; // 15% discount
-            } else if (quantity >= 500) {
-                unitPrice *= 0.90; // 10% discount
-            }
+    function closeCartDrawer() {
+      const overlay = document.getElementById('cart-drawer-overlay');
+      const drawer = document.getElementById('cart-drawer');
+      drawer.classList.add('translate-x-full');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+      }, 300);
+    }
 
-            const total = unitPrice * quantity;
-            document.getElementById('price-estimate').textContent = '£' + total.toFixed(2);
-        }
+    // Quick View Modal
+    function openQuickView(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
 
-        // Form Submit
-        function handleQuoteSubmit(e) {
-            e.preventDefault();
-            document.getElementById('confirm-modal').classList.remove('hidden');
-            document.getElementById('confirm-modal').classList.add('flex');
-        }
+      // DataLayer Event: view_item
+      pushToDataLayer('view_item', {
+        currency: 'GBP',
+        value: product.price,
+        items: [{
+          item_id: product.id,
+          item_name: product.name,
+          item_category: product.category_label,
+          price: product.price
+        }]
+      });
 
-        function closeConfirmModal() {
-            document.getElementById('confirm-modal').classList.add('hidden');
-            document.getElementById('confirm-modal').classList.remove('flex');
-            document.getElementById('quote-form').reset();
-            calculateEstimate();
-        }
+      const modalContent = document.getElementById('quickview-content');
+      modalContent.innerHTML = `
+        <div class="h-64 sm:h-full bg-bakery-100">
+          <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex flex-col justify-between space-y-4">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-bakery-200 text-bakery-800 px-2.5 py-1 rounded-full">${product.category_label}</span>
+            <h3 class="font-serif-title font-bold text-2xl text-bakery-900 mt-2">${product.name}</h3>
+            <p class="text-xs text-bakery-700 mt-2 leading-relaxed">${product.description}</p>
+          </div>
 
-        // Newsletter Submit
-        function handleNewsletter(e) {
-            e.preventDefault();
-            alert('Thank you for subscribing to The Artisan Biscuit Co. newsletter!');
-            e.target.reset();
-        }
+          <div class="space-y-3 pt-4 border-t border-bakery-100">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-bakery-900">£${product.price.toFixed(2)}</span>
+              <span class="text-xs text-amber-600 font-semibold"><i class="fa-solid fa-star"></i> ${product.rating} (${product.reviews_count} reviews)</span>
+            </div>
 
-        // Testimonials Carousel Data & Logic
-        const testimonials = [
-            {
-                quote: "The custom embossed biscuits for our tech summit launch were an absolute showstopper! Not only did our logo look razor-sharp, but the shortbread melted in your mouth. We ordered 1,500 units and didn't have a single crumb left.",
-                author: "Sarah Jenkins",
-                role: "Head of Events, Horizon Tech",
-                avatar: "SJ"
-            },
-            {
-                quote: "We partner with The Artisan Biscuit Co. for all our luxury wedding hampers. The attention to detail, organic flavors, and punctual nationwide shipping make them an absolute joy to work with.",
-                author: "Marcus Vance",
-                role: "Director, Vance & Co. Wedding Design",
-                avatar: "MV"
-            },
-            {
-                quote: "Our cafe customers constantly compliment the Dark Choc & Salted Caramel sandwiched biscuits. Sales have increased 30% since switching our bakery supplier!",
-                author: "Elena Rostova",
-                role: "Founder, Bloom & Bean Cafe Group",
-                avatar: "ER"
-            }
-        ];
+            <button onclick="addToCart('${product.id}', 1); closeQuickView();" 
+                    class="w-full py-3 bg-bakery-800 text-white font-medium text-xs rounded-xl hover:bg-bakery-700 transition flex justify-center items-center space-x-2 shadow-md">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>Add to Basket</span>
+            </button>
+          </div>
+        </div>
+      `;
 
-        let currentTestimonial = 0;
+      document.getElementById('quickview-modal').classList.remove('hidden');
+    }
 
-        function updateTestimonial() {
-            const data = testimonials[currentTestimonial];
-            document.getElementById('testimonial-quote').textContent = `"${data.quote}"`;
-            document.getElementById('testimonial-author').textContent = data.author;
-            document.getElementById('testimonial-role').textContent = data.role;
-            document.getElementById('testimonial-avatar').textContent = data.avatar;
-        }
+    function closeQuickView() {
+      document.getElementById('quickview-modal').classList.add('hidden');
+    }
 
-        function nextTestimonial() {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            updateTestimonial();
-        }
+    // Checkout Flow Functions
+    function startCheckout() {
+      if (cart.length === 0) return;
+      closeCartDrawer();
 
-        function prevTestimonial() {
-            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-            updateTestimonial();
-        }
+      const totalVal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-        // Initialize calculation on load
-        calculateEstimate();
-    </script>
+      // DataLayer Event: begin_checkout
+      pushToDataLayer('begin_checkout', {
+        currency: 'GBP',
+        value: totalVal,
+        items: cart.map(item => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.quantity
+        }))
+      });
+
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    // Track Shipping and Payment Step Inputs
+    function trackCheckoutStep(eventName, stepDetail) {
+      pushToDataLayer(eventName, {
+        step_detail: stepDetail,
+        currency: 'GBP',
+        value: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      });
+    }
+
+    // Complete Purchase Event
+    function handlePurchaseSubmit(event) {
+      event.preventDefault();
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal > 40 ? 0 : 3.95;
+      const total = subtotal + shipping;
+      const transactionId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+
+      // GA4 DataLayer Event: purchase
+      pushToDataLayer('purchase', {
+        transaction_id: transactionId,
+        value: total,
+        tax: Number((total * 0.2).toFixed(2)),
+        shipping: shipping,
+        currency: 'GBP',
+        items: cart.map(item => ({
+          item_id: item.id,
+          item_name: item.name,
+          item_category: item.category_label,
+          price: item.price,
+          quantity: item.quantity
+        }))
+      });
+
+      // Update Order Complete UI
+      document.getElementById('order-ref-id').innerText = '#' + transactionId;
+      document.getElementById('order-ref-count').innerText = `${cart.reduce((s, i) => s + i.quantity, 0)} items`;
+      document.getElementById('order-ref-total').innerText = `£${total.toFixed(2)}`;
+
+      // Clear Cart
+      cart = [];
+      updateCartUI();
+
+      closeCheckoutModal();
+      document.getElementById('order-complete-modal').classList.remove('hidden');
+    }
+
+    function closeOrderCompleteModal() {
+      document.getElementById('order-complete-modal').classList.add('hidden');
+    }
+
+    // Track Form Field Focus / Changes
+    function trackFormField(formId, fieldName, actionType) {
+      pushToDataLayer('form_field_interaction', {
+        form_id: formId,
+        field_name: fieldName,
+        action: actionType
+      });
+    }
+
+    // Custom Quote Price Estimate Calculator
+    function updateQuoteEstimate() {
+      const qty = parseInt(document.getElementById('quote-quantity').value, 10);
+      let unitPrice = 2.50;
+      if (qty >= 250) unitPrice = 2.00;
+      if (qty >= 500) unitPrice = 1.80;
+      if (qty >= 1000) unitPrice = 1.50;
+
+      const totalEstimate = qty * unitPrice;
+      document.getElementById('quote-estimate-price').innerHTML = `
+        £${totalEstimate.toFixed(2)} <span class="text-xs font-normal text-bakery-600">(£${unitPrice.toFixed(2)} / unit)</span>
+      `;
+    }
+
+    // Handle Custom Quote Form Submit
+    function handleQuoteSubmit(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('quote-name').value;
+      const email = document.getElementById('quote-email').value;
+      const eventType = document.getElementById('quote-event').value;
+      const quantity = document.getElementById('quote-quantity').value;
+
+      // DataLayer Event: form_submit / generate_lead
+      pushToDataLayer('form_submit', {
+        form_name: 'custom_quote_inquiry',
+        lead_type: 'corporate_quote',
+        event_type: eventType,
+        quantity: quantity,
+        user_email_hash: 'sha256_mock_hash'
+      });
+
+      showNotification('Thank you! Custom quote request submitted.');
+      document.getElementById('custom-quote-form').reset();
+      updateQuoteEstimate();
+    }
+
+    // Handle Newsletter Signup
+    function handleNewsletterSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('newsletter-email').value;
+
+      // DataLayer Event: generate_lead
+      pushToDataLayer('generate_lead', {
+        form_name: 'newsletter_signup',
+        lead_source: 'footer_club'
+      });
+
+      showNotification('Subscribed! Check your email for your 10% discount code.');
+      document.getElementById('newsletter-form').reset();
+    }
+
+    // DataLayer Event Debugger Panel Toggle and Logger
+    function toggleDebugPanel() {
+      const panel = document.getElementById('debug-panel');
+      panel.classList.toggle('hidden');
+    }
+
+    function clearDebugLogs() {
+      const logList = document.getElementById('debug-log-list');
+      logList.innerHTML = '<div class="text-zinc-500 italic text-[10px]">Logs cleared. Perform interactions to see new events...</div>';
+    }
+
+    window.addDebugLog = function(eventName, payload) {
+      const logList = document.getElementById('debug-log-list');
+      if (!logList) return;
+
+      const time = new Date().toLocaleTimeString();
+      const logItem = document.createElement('div');
+      logItem.className = 'border-b border-zinc-800 pb-2 mb-2 hover:bg-zinc-900 p-1 rounded transition';
+
+      logItem.innerHTML = `
+        <div class="flex items-center justify-between text-zinc-300">
+          <span class="font-bold text-amber-400">⚡ ${eventName}</span>
+          <span class="text-[9px] text-zinc-500">${time}</span>
+        </div>
+        <pre class="text-[10px] text-emerald-300 overflow-x-auto mt-1">${JSON.stringify(payload, null, 2)}</pre>
+      `;
+
+      logList.prepend(logItem);
+    };
+
+    // On Window Load Initialization
+    window.onload = function() {
+      renderProducts();
+      updateCartUI();
+      // Add initial debug marker
+      if (window.addDebugLog) {
+        window.addDebugLog('page_view', {
+          title: 'Artisan Biscuit Co. Store',
+          status: 'GA4 Tracking Active'
+        });
+      }
+    };
+  </script>
 </body>
 </html>
